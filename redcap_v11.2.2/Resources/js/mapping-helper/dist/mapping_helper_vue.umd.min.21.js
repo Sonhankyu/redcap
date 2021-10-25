@@ -1,0 +1,2 @@
+(("undefined"!==typeof self?self:this)["webpackJsonpmapping_helper_vue"]=("undefined"!==typeof self?self:this)["webpackJsonpmapping_helper_vue"]||[]).push([[21],{edae:function(e,n,t){"use strict";t.r(n);var a=function(){var e=this,n=e.$createElement,t=e._self._c||n;return t("div",[t("p",[e._v("asdasdadsa")]),e._t("default",null,{endpoint:e.endpoint,interaction:e.interaction})],2)},i=[],l={data:function(){return{endpoint:"Patient"}}},p=l,s=t("2877"),u=Object(s["a"])(p,a,i,!1,null,null,null);n["default"]=u.exports}}]);
+//# sourceMappingURL=mapping_helper_vue.umd.min.21.js.map

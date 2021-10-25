@@ -1,0 +1,32 @@
+{
+    "name": "Hide Custom Application Links",
+
+    "namespace": "uzgent\\HideCustomApplicationLinks",
+    "framework-version": 3,
+
+    "description": "This module hides the custom application links in the left-hand menu of a project for all users (except super users/users with Project Design and Setup rights).",
+
+    "documentation": "README.md",
+
+    "authors": [
+        {
+            "name": "Simon Vanderschaeghe",
+            "email": "redcap@uzgent.be",
+            "institution": "University Hospital Ghent"
+        }
+    ],
+
+    "permissions": [
+        "redcap_every_page_top",
+        "redcap_module_system_enable"
+    ],
+
+    "compatibility": [
+        {
+            "php-version-min": "7.0.0",
+            "php-version-max": "",
+            "redcap-version-min": "8.0.0",
+            "redcap-version-max": ""
+        }
+    ]
+}

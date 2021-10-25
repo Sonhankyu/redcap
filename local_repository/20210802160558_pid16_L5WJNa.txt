@@ -1,0 +1,58 @@
+<table style="margin-left: auto; margin-right: auto;" border="1">
+    <tr>
+        <th>
+            <center>Surg #</center>
+        </th>
+        <th>
+            <center>Surg Date</center>
+        </th>
+        <th>
+            <center>Eye</center>
+        </th>
+        <th>
+            <center>Description</center>
+        </th>
+    </tr>
+    <tr>
+        <td style="padding-left: 10px; padding-right: 10px;">
+            <center>1</center>
+        </td>
+        <td style="padding-left: 10px; padding-right: 10px;">
+            <div class='shazam'>mhx_eyesurg_date1_v2</div>
+        </td>
+        <td style="padding-left: 10px; padding-right: 10px;">
+            <div class='shazam'>mhx_eyesurg_eye1_v2</div>
+        </td>
+        <td style="padding-left: 10px; padding-right: 10px;">
+            <div class='shazam'>mhx_eyesurg_desc1_v2</div>
+        </td>
+    </tr>
+    <tr data-shazam-mirror-visibility="mhx_eyesurg_date2_v2">
+        <td style="padding-left: 10px; padding-right: 10px;">
+            <center>2</center>
+        </td>
+        <td style="padding-left: 10px; padding-right: 10px;">
+            <div class='shazam'>mhx_eyesurg_date2_v2</div>
+        </td>
+        <td style="padding-left: 10px; padding-right: 10px;">
+            <div class='shazam'>mhx_eyesurg_eye2_v2</div>
+        </td>
+        <td style="padding-left: 10px; padding-right: 10px;">
+            <div class='shazam'>mhx_eyesurg_desc2_v2</div>
+        </td>
+    </tr>
+    <tr data-shazam-mirror-visibility="mhx_eyesurg_date3_v2">
+        <td style="padding-left: 10px; padding-right: 10px;">
+            <center>3</center>
+        </td>
+        <td style="padding-left: 10px; padding-right: 10px;">
+            <div class='shazam'>mhx_eyesurg_date3_v2</div>
+        </td>
+        <td style="padding-left: 10px; padding-right: 10px;">
+            <div class='shazam'>mhx_eyesurg_eye3_v2</div>
+        </td>
+        <td style="padding-left: 10px; padding-right: 10px;">
+            <div class='shazam'>mhx_eyesurg_desc3_v2</div>
+        </td>
+    </tr>
+</table>

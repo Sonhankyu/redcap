@@ -1,0 +1,30 @@
+{
+    "config": {
+        "platform": {
+            "php": "7.2.5"
+        }
+    },
+    "require": {
+        "league/flysystem": "^1.1.4",
+        "league/flysystem-sftp": "^1.0.22",
+        "league/flysystem-webdav": "^1.0",
+        "aws/aws-sdk-php": "^3.62",
+        "microsoft/azure-storage-blob": "*",
+        "greenlion/php-sql-parser": "^4.1",
+        "rmccue/requests": "^1.8",
+        "phpmailer/phpmailer": "^6.5.0",
+        "mobiledetect/mobiledetectlib": "*",
+        "mtdowling/jmespath.php": "^2.4",
+        "sabre/uri": "^2.2.1",
+        "sendgrid/sendgrid": "^7.0",
+        "opis/closure": "^3.5",
+        "google/cloud-storage": "^1.23",
+        "thenetworg/oauth2-azure": "^2.0",
+        "mailgun/mailgun-php": "^2.8",
+        "kriswallsmith/buzz": "^0.16.1",
+        "nyholm/psr7": "^0.2.3",
+        "php-http/curl-client": "^1.7",
+        "guzzlehttp/psr7": "^1.8",
+        "php-http/message": "^1.7"
+    }
+}

@@ -1,0 +1,296 @@
+<table border="1">
+    <tr>
+        <th style="padding-left: 10px; padding-right: 10px;">
+            <center>Letters to be read</center>
+        </th>
+        <th>
+            <center>Both</center>
+        </th>
+        <th>
+            <center>Left</center>
+        </th>
+        <th>
+            <center>Right</center>
+        </th>
+    </tr>
+    <tr>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_b_01_v2:label</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_b_01_v2</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_l_01_v2</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_r_01_v2</div>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_b_02_v2:label</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_b_02_v2</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_l_02_v2</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_r_02_v2</div>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_b_03_v2:label</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_b_03_v2</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_l_03_v2</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_r_03_v2</div>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_b_04_v2:label</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_b_04_v2</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_l_04_v2</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_r_04_v2</div>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_b_05_v2:label</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_b_05_v2</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_l_05_v2</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_r_05_v2</div>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_b_06_v2:label</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_b_06_v2</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_l_06_v2</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_r_06_v2</div>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_b_07_v2:label</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_b_07_v2</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_l_07_v2</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_r_07_v2</div>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_b_08_v2:label</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_b_08_v2</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_l_08_v2</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_r_08_v2</div>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_b_09_v2:label</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_b_09_v2</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_l_09_v2</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_r_09_v2</div>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_b_10_v2:label</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_b_10_v2</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_l_10_v2</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_r_10_v2</div>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_b_11_v2:label</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_b_11_v2</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_l_11_v2</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_r_11_v2</div>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_b_12_v2:label</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_b_12_v2</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_l_12_v2</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_r_12_v2</div>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_b_13_v2:label</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_b_13_v2</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_l_13_v2</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_r_13_v2</div>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_b_14_v2:label</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_b_14_v2</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_l_14_v2</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_r_14_v2</div>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_b_15_v2:label</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_b_15_v2</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_l_15_v2</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_r_15_v2</div>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_b_16_v2:label</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_b_16_v2</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_l_16_v2</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_r_16_v2</div>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_b_17_v2:label</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_b_17_v2</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_l_17_v2</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_r_17_v2</div>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_b_18_v2:label</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_b_18_v2</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_l_18_v2</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_r_18_v2</div>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_b_19_v2:label</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_b_19_v2</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_l_19_v2</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_r_19_v2</div>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_b_20_v2:label</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_b_20_v2</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_l_20_v2</div>
+        </td>
+        <td style="padding-left: 15px;">
+            <div class='shazam'>txt_r_20_v2</div>
+        </td>
+    </tr>
+</table>

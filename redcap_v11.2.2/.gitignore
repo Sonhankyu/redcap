@@ -1,0 +1,7 @@
+/.vscode
+/.idea
+.DS_Store
+node_modules
+yarn.lock
+/Resources/webpack/yarn.lock
+/Libraries/phpqrcode/errors.txt

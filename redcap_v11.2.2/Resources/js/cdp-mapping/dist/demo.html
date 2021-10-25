@@ -1,0 +1,19 @@
+<meta charset="utf-8">
+<title>cdp_mapping_vue demo</title>
+<script src="https://unpkg.com/vue"></script>
+<script src="./cdp_mapping_vue.umd.js"></script>
+
+<link rel="stylesheet" href="./cdp_mapping_vue.css">
+
+
+<div id="app">
+  <demo></demo>
+</div>
+
+<script>
+new Vue({
+  components: {
+    demo: cdp_mapping_vue
+  }
+}).$mount('#app')
+</script>

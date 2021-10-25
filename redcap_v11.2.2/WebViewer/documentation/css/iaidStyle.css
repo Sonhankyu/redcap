@@ -1,0 +1,169 @@
+body {
+    background-color: #232323;
+}
+
+.navbar {
+    background-color: #232323;
+    /*border-bottom: 5px solid -webkit-linear-gradient(#2c3493, #06a3cd, #2c3493);*/
+    border-bottom: 5px solid #06a3cd;
+}
+
+div.sidebarTitle {
+    color: #6598e0;
+}
+li.sidebarTitle {
+    margin-top:20px;
+      font-weight:normal;
+      font-size:130%;
+      color: #6598e0;
+      margin-bottom:10px;
+      margin-left: 5px;
+  
+  }
+  
+
+.projectTitle {
+    margin-top: 5px;
+}
+
+.col-md-9 {
+    background-color: #222;
+    border-radius: 10px;
+}
+
+.col-md-3 {
+    background-color: #222;
+    border-radius: 10px;
+}
+
+/* navgoco sidebar styles (customized) */
+.nav, .nav ul, .nav li {
+    list-style: none;
+}
+
+.nav ul {
+    padding: 0;
+    /*margin: 0 0 0 18px;*/
+    margin:0px;
+}
+
+.nav {
+    /* padding: 4px;*/
+    padding:0px;
+    margin: 0px;
+}
+
+.nav > li {
+    margin: 1px 0;
+}
+
+.nav > li li {
+    margin: 2px 0;
+}
+
+.nav a {
+    color: #333;
+    display: block;
+    outline: none;
+    /*-webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;*/
+    text-decoration: none;
+}
+
+.nav li > a > span {
+    float: right;
+    font-size: 19px;
+    font-weight: bolder;
+}
+
+
+.nav li > a > span:after {
+    content: '\25be';
+}
+.nav li.active > a > span:after {
+    content: '\25b4';
+}
+
+.nav a:hover, .nav li.active > a {
+    background-color: #2a2d35;
+    color: #f5f5f5;
+}
+
+.nav > li > a {
+    border-left: 7px solid #555555;
+}
+
+.nav > li.active > a  {
+    /*background-color: #347DBE;*/
+    border-left: 7px solid #2c3493;
+}
+
+/* nav child */
+.nav li a {
+    font-size: 12px;
+    line-height: 25px;
+    padding: 2px 10px;
+    background-color: #2a2d35;
+    color: #eeeeee;
+}
+
+/* nav group */
+.nav > li > a {
+    font-size: 14px;
+    line-height: 25px;
+    padding: 4px 10px;
+}
+
+ul#mysidebar {
+    border-radius:0px;
+}
+
+.nav ul li ul li a {
+    padding-left:40px;
+}
+
+.nav li.thirdlevel > a {
+    color: #248EC2;
+    font-weight:bold;
+    padding-left:20px;
+    background-color: whitesmoke !important;
+}
+
+
+.nav ul li a {
+    background-color: #2a2d35;
+}
+
+.nav li a {
+    padding-right:10px;
+}
+
+.nav li a:hover {
+    background-color: #2a2d35;
+}
+
+.nav ul li a {
+    border-top:1px solid #343640;
+    padding-left:30px;
+}
+/* end sidebar */
+
+h1 {
+    color: #eeeeee;
+    font-size: 30px;
+}
+h2 {
+    color: #6598e0;
+}
+h3 {
+    color: #3765a5;
+}
+p {
+    color: #aaaaaa;
+}
+
+.col-lg-12
+{
+    color: #aaaaaa;
+}

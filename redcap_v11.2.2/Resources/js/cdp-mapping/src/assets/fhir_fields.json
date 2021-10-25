@@ -1,0 +1,145 @@
+ {
+  "": {
+    "id": {
+      "field": "id",
+      "temporal": 0,
+      "label": "Medical record number",
+      "description": "Medical record number",
+      "category": "",
+      "subcategory": "",
+      "identifier": 1
+    }
+  },
+  "Allergy Intolerance": {
+    "allergy-list": {
+      "field": "allergy-list",
+      "temporal": 0,
+      "label": "Allergy intolerance",
+      "description": "Allergy intolerance",
+      "category": "Allergy Intolerance",
+      "subcategory": ""
+    }
+  },
+  "Condition": {
+    "problem-list": {
+      "field": "problem-list",
+      "temporal": 0,
+      "label": "Problem list and health concerns",
+      "description": "Problem list and health concerns",
+      "category": "Condition",
+      "subcategory": ""
+    }
+  },
+  "Demographics": {
+    "address-city": {
+      "field": "address-city",
+      "temporal": 0,
+      "label": "Address (city)",
+      "description": "Address (city)",
+      "category": "Demographics",
+      "subcategory": ""
+    },
+    "address-country": {
+      "field": "address-country",
+      "temporal": 0,
+      "label": "Address (country)",
+      "description": "Address (country)",
+      "category": "Demographics",
+      "subcategory": ""
+    },
+    "address-line": {
+      "field": "address-line",
+      "temporal": 0,
+      "label": "Address (street)",
+      "description": "Address (street)",
+      "category": "Demographics",
+      "subcategory": ""
+    }
+  },
+  "Medications": {
+    "active-medications-list": {
+      "field": "active-medications-list",
+      "temporal": 0,
+      "label": "Active medications list",
+      "description": "Active medications list",
+      "category": "Medications",
+      "subcategory": ""
+    },
+    "completed-medications-list": {
+      "field": "completed-medications-list",
+      "temporal": 0,
+      "label": "Completed medications list",
+      "description": "Completed medications list",
+      "category": "Medications",
+      "subcategory": ""
+    },
+    "on-hold-medications-list": {
+      "field": "on-hold-medications-list",
+      "temporal": 0,
+      "label": "On hold medications list",
+      "description": "On hold medications list",
+      "category": "Medications",
+      "subcategory": ""
+    },
+    "stopped-medications-list": {
+      "field": "stopped-medications-list",
+      "temporal": 0,
+      "label": "Stopped medications list",
+      "description": "Stopped medications list",
+      "category": "Medications",
+      "subcategory": ""
+    }
+  },
+  "Vital Signs": {
+    "3141-9": {
+      "field": "3141-9",
+      "temporal": 1,
+      "label": "Body weight",
+      "description": "Body weight",
+      "category": "Vital Signs",
+      "subcategory": ""
+    },
+    "35094-2": {
+      "field": "35094-2",
+      "temporal": 1,
+      "label": "Blood pressure panel",
+      "description": "Blood pressure panel",
+      "category": "Vital Signs",
+      "subcategory": ""
+    },
+    "Body height|Len|Pt|^Patient": {
+      "3137-7": {
+        "field": "3137-7",
+        "temporal": 1,
+        "label": "Body height Measured",
+        "description": "Body height Measured",
+        "category": "Vital Signs",
+        "subcategory": "Body height|Len|Pt|^Patient"
+      },
+      "3138-5": {
+        "field": "3138-5",
+        "temporal": 1,
+        "label": "Body height Stated",
+        "description": "Body height Stated",
+        "category": "Vital Signs",
+        "subcategory": "Body height|Len|Pt|^Patient"
+      },
+      "8306-3": {
+        "field": "8306-3",
+        "temporal": 1,
+        "label": "Body height --lying",
+        "description": "Body height --lying",
+        "category": "Vital Signs",
+        "subcategory": "Body height|Len|Pt|^Patient"
+      },
+      "8308-9": {
+        "field": "8308-9",
+        "temporal": 1,
+        "label": "Body height --standing",
+        "description": "Body height --standing",
+        "category": "Vital Signs",
+        "subcategory": "Body height|Len|Pt|^Patient"
+      }
+    }
+  }
+}

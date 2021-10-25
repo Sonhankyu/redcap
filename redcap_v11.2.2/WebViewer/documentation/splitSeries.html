@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Split series into 3x2 layout">
+<meta name="keywords" content="getting_started,  ">
+<title>iAID Web Documentation</title>
+<link rel="stylesheet" href="css/syntax.css">
+
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">-->
+<link rel="stylesheet" href="css/modern-business.css">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="css/customstyles.css">
+<link rel="stylesheet" href="css/boxshadowproperties.css">
+<!-- most color styles are extracted out to here -->
+<link rel="stylesheet" href="css/theme-blue.css">
+<link rel="stylesheet" href="css/iaidStyle.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="js/jquery.navgoco.min.js"></script>
+
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- Anchor.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
+<script src="js/toc.js"></script>
+<script src="js/customscripts.js"></script>
+
+<link rel="shortcut icon" href="images/favicon.ico">
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link rel="alternate" type="application/rss+xml" title="title" href="http://localhost:4000/feed.xml">
+
+    <script>
+        $(document).ready(function() {
+            // Initialize navgoco with default options
+            $("#mysidebar").navgoco({
+                caretHtml: '',
+                accordion: true,
+                openClass: 'active', // open
+                save: false, // leave false or nav highlighting doesn't work right
+                cookie: {
+                    name: 'navgoco',
+                    expires: false,
+                    path: '/'
+                },
+                slide: {
+                    duration: 400,
+                    easing: 'swing'
+                }
+            });
+
+            $("#collapseAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', false);
+            });
+
+            $("#expandAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', true);
+            });
+
+        });
+
+    </script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#tg-sb-link").click(function() {
+                $("#tg-sb-sidebar").toggle();
+                $("#tg-sb-content").toggleClass('col-md-9');
+                $("#tg-sb-content").toggleClass('col-md-12');
+                $("#tg-sb-icon").toggleClass('fa-toggle-on');
+                $("#tg-sb-icon").toggleClass('fa-toggle-off');
+            });
+        });
+    </script>
+    
+
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container topnavlinks">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="documentation.html"> <img src="images/company_logo.png" class="d-inline-block align-top" alt="" style="float: left"> &nbsp; <span class="projectTitle">documentation</span></a>
+        </div>
+    </div>
+        <!-- /.container -->
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+  <div id="main">
+    <!-- Content Row -->
+    <div class="row">
+        
+        
+            <!-- Sidebar Column -->
+            <div class="col-md-3" id="tg-sb-sidebar">
+                
+
+<ul id="mysidebar" class="nav">
+  <li class="sidebarTitle">lite ver 1.33</li>
+  
+  
+  
+      
+  
+  <li>
+      <a title="Introduction" href="#">Introduction</a>
+      <ul>
+          
+          
+          
+          <li><a title="Solution Overview" href="documentation.html">Solution Overview</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a title="Requirements" href="requirement.html">Requirements</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a title="License Agreement" href="licenseAgreement.html">License Agreement</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a title="Worklist(default ver.)" href="#">Worklist(default ver.)</a>
+      <ul>
+          
+          
+          
+          <li><a title="Login" href="login_default.html">Login</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a title="Worklist Overview" href="worklistOverview_default.html">Worklist Overview</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a title="DICOM Upload" href="dicomUpload_default.html">DICOM Upload</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a title="Worklist(ctims ver.)" href="#">Worklist(ctims ver.)</a>
+      <ul>
+          
+          
+          
+          <li><a title="Login" href="login_ctims.html">Login</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a title="Worklist Overview" href="worklistOverview_ctims.html">Worklist Overview</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a title="DICOM Upload" href="dicomUpload_ctims.html">DICOM Upload</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a title="Report" href="report.html">Report</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a title="Administrator Setting" href="adminSetting_ctims.html">Administrator Setting</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a title="Study Management" href="studySetup_ctims.html">Study Management</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a title="Image Viewer" href="#">Image Viewer</a>
+      <ul>
+          
+          
+          
+          <li><a title="Viewer Overview" href="viewerOverview.html">Viewer Overview</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a title="Series" href="series.html">Series</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a title="Layout" href="layout.html">Layout</a></li>
+          
+          
+          
+          
+          
+          
+          <li class="active"><a title="SplitSeries" href="splitSeries.html">SplitSeries</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a title="Pan" href="pan.html">Pan</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a title="Zoom" href="zoom.html">Zoom</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a title="Contrast" href="contrast.html">Contrast</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a title="Measure" href="measure.html">Measure</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a title="Link" href="link.html">Link</a></li>
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          <li><a title="Information" href="information.html">Information</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a title="FullScreen" href="fullScreen.html">FullScreen</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a title="ShortCuts" href="#">ShortCuts</a>
+      <ul>
+          
+          
+          
+          <li><a title="Keyboard ShortCuts" href="shortcut.html">Keyboard ShortCuts</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+      
+      <!-- if you aren't using the accordion, uncomment this block:
+         <p class="external">
+             <a href="#" id="collapseAll">Collapse All</a> | <a href="#" id="expandAll">Expand All</a>
+         </p>
+         -->
+</ul>
+
+<!-- this highlights the active parent class in the navgoco sidebar. this is critical so that the parent expands when you're viewing a page. This must appear below the sidebar code above. Otherwise, if placed inside customscripts.js, the script runs before the sidebar code runs and the class never gets inserted.-->
+<script>$("li.active").parents('li').toggleClass("active");</script>
+
+            </div>
+            
+        
+
+        <!-- Content Column -->
+        <div class="col-md-9" id="tg-sb-content">
+            <div class="post-header">
+   <h1 class="post-title-main">Split Series</h1>
+</div>
+
+
+
+<div class="post-content">
+
+   
+    <div class="summary">Split series into 3x2 layout</div>
+   
+
+    
+
+   <h2 id="split-series-tool">Split Series Tool</h2>
+
+<p>DICOM Series can be split into 3x2 layout.</p>
+
+<h3 id="icon">Icon</h3>
+
+<p><img src="images\SplitSeries.png" alt="Layout0" /></p>
+
+<h3 id="details">Details</h3>
+
+<p>To split the selected series into 3x2 layout, click the series information on the left side of the screen. It allows series to be placed in sequence.</p>
+
+<p><img src="images\SplitSeries1.png" alt="Layout0" /></p>
+
+</div>
+
+
+
+<footer>
+            <div class="row">
+                <div class="col-lg-12 footer">
+               &copy;2021 . All rights reserved. <br />
+ Site last generated: Mar 10, 2021 <br />
+<p><img src="images/company_logo.png" alt="Company logo" style="margin-top: 10px"/></p>
+                </div>
+            </div>
+</footer>
+
+
+        </div>
+    <!-- /.row -->
+</div>
+<!-- /.container -->
+</div>
+<!-- /#main -->
+    </div>
+
+</body>
+</html>
