@@ -3,9 +3,7 @@
     "description": "REDCap (Research Electronic Data Capture), a secure web application for building and managing online surveys and databases.",
     "type": "project",
     "authors": [],
-    "require": {
-      "ext-mysqli": "*"
-    },
+    "require": {},
     "autoload": {
         "psr-4": {
             "Vanderbilt\\REDCap\\Classes\\": "Classes"
