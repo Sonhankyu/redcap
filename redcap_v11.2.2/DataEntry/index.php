@@ -575,7 +575,6 @@ print	RCView::div(array('id'=>'dataEntryTopOptions'),
                 // ?pid=$project_id&page={$_GET['page']}'; <- pid, event_id 에 해당되는 영상 가져오기위해 필요
                 // 'onclick'=>"window.location.href=app_path_webroot+'Design/online_designer.php?pid=$project_id&page={$_GET['page']}';"
                 RCView::button(array('onclick'=>"openViewer();", 'class'=>'jqbuttonmed'),
-                    RCView::img(array('src'=>'', 'style'=>'vertical-align:middle;position:relative;top:-1px;')) .
                     RCView::span(array('style'=>'vertical-align:middle;color:#444;'), 'WebViewer')
                 ) .
 
@@ -764,6 +763,9 @@ print	RCView::div(array('id'=>'dataEntryTopOptions'),
         }
     }
 
+    // function hideNshowBtn(){
+    //     $('#showImage').css({"background":"url('".APP_PATH_IMAGES."'btn_show.png)"});
+    // }
     function hideBtn(){
         $('#showImage').show();
         $('#seriesCnt').show();
@@ -775,6 +777,7 @@ print	RCView::div(array('id'=>'dataEntryTopOptions'),
         $('#seriesList').show();
         $('#showImage').hide();
         $('#seriesCnt').hide();
+        //$('#showImage').css({"background":"url(. <?//=APP_PATH_IMAGES?>// . btn_show.png)"});
     }
 
 $(function(){

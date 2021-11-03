@@ -27,9 +27,9 @@
 $connect = mysqli_connect(
     '127.0.0.1',
     'root',
-    'qwer1234',
+    '',
     'redcap',
-    '3306'
+    '3307'
 );
 
 if(mysqli_connect_errno()) {
@@ -51,7 +51,13 @@ while ($row = mysqli_fetch_array($result)) {
     $url_arr[] = '"./files/' . $row[0] . '"';
 }
 
-$url = implode(", ", $url_arr);
+if (!empty($url_arr)){
+    $url = implode(", ", $url_arr);
+}else{
+    echo "<script>alert('No image selected')</script>";
+    echo "<script>window.close()</script>";
+}
+
 
 ?>
 <!DOCTYPE html>
