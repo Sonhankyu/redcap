@@ -5,20 +5,8 @@ require_once dirname(dirname(__FILE__)) . '/Config/init_project.php';
 
 System::increaseMemory(2048);
 
-// redcap DB 연결
-$connect = mysqli_connect(
-    '127.0.0.1',
-    'root',
-    'qwer1234',
-    'redcap',
-    '3306'
-);
 
-if(mysqli_connect_errno()) {
-    echo 'Connect Failed : ' . mysqli_connect_error();
-}
-
-// eCRF 페이지 파라미터 받아옴
+// eCRF 페이지 URL 파라미터 받아옴
 $pid = $_GET['pid'];
 $subj_id = $_GET['id'];
 $evt_id = $_GET['event_id'];
@@ -30,28 +18,11 @@ $sql = "SELECT series.series_iuid, series.series_desc
         INNER JOIN asan_pacs_series rseries ON redcap.idx = rseries.asan_pacs_idx AND series.series_iuid = rseries.series_iuid
         WHERE redcap.project_id = '{$pid}' AND redcap.subject_id = '{$subj_id}' AND redcap.event_id = '{$evt_id}' AND redcap.instance = '{$instance_no}'";
 
-$result = mysqli_query($connect, $sql);
-while ($row = mysqli_fetch_array($result)) {
+$result = db_query($sql);
+while ($row = db_fetch_array($result)) {
     $seriesDesc_arr[] = $row['series_desc'];
     $seriesUID_arr[] = $row['series_iuid'];
-//    print_r($row);
 }
-//$seriesUID = implode(", ", $seriesUID_arr);
-//print_r($seriesDesc_arr);
-//echo $seriesUID;
-//exit();
-// filepath 가져오기
-//$sql = "SELECT pacsdb.files.filepath
-//        FROM pacsdb.files AS files
-//        INNER JOIN pacsdb.instance AS inst ON files.instance_fk = inst.pk
-//        INNER  JOIN pacsdb.series AS series ON inst.series_fk = series.pk
-//        WHERE series.series_iuid";
-//
-//$result = mysqli_query($connect, $sql);
-//
-//while ($row = mysqli_fetch_array($result)) {
-//    $url_arr[] = '"./files/' . $row[0] . '"';
-//}
 
 // 이미지 리스트 테이블
 for($i = 1; $i<=count($seriesUID_arr); $i++) {
