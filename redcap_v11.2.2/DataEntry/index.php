@@ -11,6 +11,7 @@ $pid = $_GET['pid'];
 $subj_id = $_GET['id'];
 $evt_id = $_GET['event_id'];
 $instance_no = $_GET['instance'];
+$page = $_GET['page'];
 
 $sql = "SELECT series.series_iuid, series.series_desc
         FROM pacsdb.series AS series 
@@ -524,6 +525,25 @@ $pdfDownloadSurveyFormText2 = ($surveys_enabled) ? $lang['data_entry_136'] : $la
 $end_of_survey_pdf_download = (isset($Proj->forms[$_GET['page']]['survey_id']) && $Proj->surveys[$Proj->forms[$_GET['page']]['survey_id']]['end_of_survey_pdf_download'] == '1');
 // Get custom record label/secondary pk for this record
 $extra_record_labels = Records::getCustomRecordLabelsSecondaryFieldAllRecords(addDDEending($_GET['id']), true, getArm());
+
+//  Analysist Form Link
+$allSubjectList = array_values(Records::getRecordList(PROJECT_ID));
+$sql = "SELECT double_data FROM redcap_user_rights WHERE project_id = $project_id AND double_data > '0' ORDER BY double_data";
+$q = db_query($sql);
+while ($result = db_fetch_assoc($q)){
+    $tmp[] = $result['double_data'];
+}
+
+if(ADMIN_RIGHTS || $user_rights['role_id'] > 0){
+    foreach ($tmp as $analyst_user) {
+        if(in_array("$subj_id--$analyst_user", $allSubjectList)){
+            $analysist_Link = APP_PATH_WEBROOT."DataEntry/index.php?pid=$pid&id=$subj_id--$analyst_user&event_id=$evt_id&page=$page";
+            $button_arr[] = RCView::button(array('id'=>'viewAnalysist','class'=>'jqbuttonmed','onclick'=>'window.open("'.$analysist_Link.'")'), "Analyst #$analyst_user");
+        }
+    }
+    $analysist_button = implode("", $button_arr);
+}
+
 // Set data entry form header text
 print	RCView::div(array('id'=>'dataEntryTopOptions'),
             // Display logo, project title, and record name (PRINTERS ONLY)
@@ -536,18 +556,15 @@ print	RCView::div(array('id'=>'dataEntryTopOptions'),
 				    RCView::div(array('class'=>'font-weight-bold'), strip_tags($Proj->table_pk_label)." ".$_GET['id'] . strip_tags($extra_record_labels == '' ? '' : " $extra_record_labels"))
                 )
             ) .
-			RCView::div(array('id'=>'dataEntryTopOptionsButtons', 'class'=>'d-print-none'),
-				// "Actions:" text
-				RCView::span(array('style'=>'color:#777;margin-right:6px;'), $lang['edit_project_29']) .
+//			RCView::div(array('id'=>'dataEntryTopOptionsButtons', 'class'=>'d-print-none'),
+//				// "Actions:" text
+//				RCView::span(array('style'=>'color:#777;margin-right:6px;'), $lang['edit_project_29']) .
 				// Modify Instrument button (if displayed)
 //				$modifyInstBtn .
 
                 // WebViewer Button
                 // ?pid=$project_id&page={$_GET['page']}'; <- pid, event_id 에 해당되는 영상 가져오기위해 필요
                 // 'onclick'=>"window.location.href=app_path_webroot+'Design/online_designer.php?pid=$project_id&page={$_GET['page']}';"
-                RCView::button(array('onclick'=>"openViewer();", 'class'=>'jqbuttonmed'),
-                    RCView::span(array('style'=>'vertical-align:middle;color:#444;'), 'WebViewer')
-                ) .
 
 				// PDF button - 사용 안함
 //				RCView::button(array('id'=>'pdfExportDropdownTrigger', 'onclick'=>"showBtnDropdownList(this,event,'pdfExportDropdownDiv');", 'class'=>'jqbuttonmed'),
@@ -556,7 +573,7 @@ print	RCView::div(array('id'=>'dataEntryTopOptions'),
 //					RCView::img(array('src'=>'arrow_state_grey_expanded.png', 'style'=>'margin-left:2px;vertical-align:middle;position:relative;top:-1px;'))
 //				) .
 				// Share Instrument button (if displayed)
-				$shareInstBtn
+//				$shareInstBtn
 
 				// PDF button/drop-down options (initially hidden) - 사용 안함
 //				RCView::div(array('id'=>'pdfExportDropdownDiv', 'style'=>'display:none;position:absolute;z-index:1000;'),
@@ -627,7 +644,15 @@ print	RCView::div(array('id'=>'dataEntryTopOptions'),
 //						"{$lang['global_80']} {$lang['data_entry_200']}"
 //					)
 //				)
+//            ).
+            RCView::div(array('id'=>'actionButton', 'class'=>'d-print-none'),
+                // "Actions:" text
+                RCView::span(array('style'=>'color:#777;margin-right:6px;'), $lang['edit_project_29']) .
+                RCView::button(array('onclick'=>"openViewer();", 'class'=>'jqbuttonmed'),
+                    RCView::span(array('style'=>'vertical-align:middle;color:#444;'), 'WebViewer')
+                )
             ).
+
             // Image List Table
             RCView::div(array('id'=>'dcmImageList'),
                 RCView::div(array('id'=>'list-title', 'style'=>'margin-top:20px; color:#800000;font-size:16px;font-weight:bold;'),"Image") .
@@ -668,8 +693,17 @@ print	RCView::div(array('id'=>'dataEntryTopOptions'),
 				".RCView::escape($Proj->forms[$_GET['page']]['menu'])." $formMenuAppend" .
 				// "Record was edited" message for Save&Stay btn
 				RCView::div(array('class'=>'d-print-none'), (isset($_GET['msg']) && $_GET['msg'] == 'edit' ? $context_msg_update : ''))
-			)
+			) .
+
+            RCView::div(array(),
+                RCView::p(array(),
+                    $analysist_button
+                )
+            ) .
+            RCView::br()
 		);
+
+//  $this_url = APP_PATH_WEBROOT."DataEntry/index.php?pid=$project_id&id=".urlencode($displayid)."&event_id={$row['event_id']}&page={$row['form_name']}"
 
 
 // Javascript
