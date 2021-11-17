@@ -258,7 +258,7 @@ if (!empty($user_rights))
 	if ($repeatforms && $scheduling && $user_rights['calendar'] == '1') {
 		$dataEntry .= "<div class='hang'><i class=\"far fa-calendar-plus\" style='text-indent: 0;margin-left:2px;margin-left:1px;'></i>&nbsp;&nbsp;<a href='".APP_PATH_WEBROOT."Calendar/scheduling.php?pid=$project_id'>".$lang['global_25']."</a></div>";
 		if ($status < 1) {
-			$dataEntry .=  "<div class='menuboxsub'>- ".$lang['bottom_19']."</div>";
+//			$dataEntry .=  "<div class='menuboxsub'>- ".$lang['bottom_19']."</div>";
 		}
 	}
 
@@ -330,9 +330,9 @@ if (!empty($user_rights))
 										$record_display2
 									) .
 									RCView::div(array('style'=>'float:right;'),
-//										RCView::a(array('id'=>'menuLnkChooseOtherRec','class'=>'opacity65','href'=>APP_PATH_WEBROOT."DataEntry/record_home.php?pid=$project_id"),
-//											$lang['bottom_63']
-//										)
+										RCView::a(array('id'=>'menuLnkChooseOtherRec','class'=>'opacity65','href'=>APP_PATH_WEBROOT."DataEntry/record_home.php?pid=$project_id"),
+											$lang['bottom_63']
+										)
 									) .
 									RCView::div(array('class'=>'clear'), '')
 								);
