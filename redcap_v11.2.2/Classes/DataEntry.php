@@ -3835,9 +3835,9 @@ class DataEntry
                         {
                             // Add hidden old id field (to catch record renaming)
                             print "<input type='hidden' name='__old_id__' value='" . htmlspecialchars($value, ENT_QUOTES) . "'>";
-//                            print "<div style='color:#777;font-size:7pt;line-height:8pt;padding:5px 0 2px;' class='d-print-none'>".$lang['data_entry_322'];
-//                            print ' <a class="opacity75" style="font-size:11px;text-decoration:underline;font-size:7pt;line-height:8pt;" href="'.APP_PATH_WEBROOT.'DataEntry/record_home.php?pid='.PROJECT_ID.'&id='.$_GET['id'].($Proj->eventInfo[$_GET['event_id']]['arm_num'] > 1 ? '&arm='.$Proj->eventInfo[$_GET['event_id']]['arm_num'] : '').'">'.$lang['grid_42'].'</a>'.$lang['period'];
-//                            print "</div>";
+                            print "<div style='color:#777;font-size:7pt;line-height:8pt;padding:5px 0 2px;' class='d-print-none'>".$lang['data_entry_322'];
+                            print ' <a class="opacity75" style="font-size:11px;text-decoration:underline;font-size:7pt;line-height:8pt;" href="'.APP_PATH_WEBROOT.'DataEntry/record_home.php?pid='.PROJECT_ID.'&id='.$_GET['id'].($Proj->eventInfo[$_GET['event_id']]['arm_num'] > 1 ? '&arm='.$Proj->eventInfo[$_GET['event_id']]['arm_num'] : '').'">'.$lang['grid_42'].'</a>'.$lang['period'];
+                            print "</div>";
                         }
                     }
                     print "</td>";
@@ -5622,7 +5622,7 @@ class DataEntry
                              $instanceNum
                              </div>";
         }
-//        return "<div id='contextMsg'>$context_msg</div>";
+        return "<div id='contextMsg'>$context_msg</div>";
     }
 
     // Input a multi-line value for Select Choices values and return a formated enum string (auto-code when any values do not have manual coding)

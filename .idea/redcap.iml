@@ -3,7 +3,6 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/redcap_v11.2.2/vendor/composer" />
-      <excludeFolder url="file://$MODULE_DIR$/modules/vanderbilt_userrightsbyrecord_v2.3" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

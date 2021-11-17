@@ -810,54 +810,27 @@ if ($double_data_entry) {
 			<input type='radio' name='double_data' value='0' "; if ($double_data == 0) print "checked";
 	print "> {$lang['rights_51']}<br>";
 	//If data entry person #1 or #2 are already designated, do not allow user to designate another person as #1 or #2.
-
-    // 유저 확인 후 유저 수 만큼 Double Data Entry Person# 생성
-    $sql = "SELECT d2.username AS NAME 
-            FROM redcap_user_rights d 
-            JOIN redcap_user_information d2 ON d.username = d2.username 
-            WHERE d.project_id = {$project_id}";
-    $q = db_query($sql);
-    $count_users = db_num_rows($q);
-
-    for ($i=1; $i<=$count_users; $i++){
-        $sql = "(select 1 from redcap_user_roles where double_data = $i and project_id = $project_id " . ($isRole ? "and role_id != $role_id" : "") . " limit 1)
+	$sql = "(select 1 from redcap_user_roles where double_data = '1' and project_id = $project_id " . ($isRole ? "and role_id != $role_id" : "") . " limit 1)
 			union
-			(select 1 from redcap_user_rights where double_data = $i and project_id = $project_id and role_id is null " . ($isRole ? "" : "and username != '".db_escape($user)."'") . " limit 1)";
-        $q1 = db_query($sql);
-        if (!db_num_rows($q1)) {
-            print "<input type='radio' name='double_data' value='$i' ";
-            if ($double_data == $i) print "checked";
-            print "> {$lang['rights_52']} #$i<br>";
-        }
-    }
+			(select 1 from redcap_user_rights where double_data = '1' and project_id = $project_id and role_id is null " . ($isRole ? "" : "and username != '".db_escape($user)."'") . " limit 1)";
+	$q1 = db_query($sql);
+	if (!db_num_rows($q1)) {
+		print "<input type='radio' name='double_data' value='1' ";
+		if ($double_data == 1) print "checked";
+		print "> {$lang['rights_52']} #1<br>";
+	}
+	$sql = "(select 1 from redcap_user_roles where double_data = '2' and project_id = $project_id " . ($isRole ? "and role_id != $role_id" : "") . " limit 1)
+			union
+			(select 1 from redcap_user_rights where double_data = '2' and project_id = $project_id and role_id is null " . ($isRole ? "" : "and username != '".db_escape($user)."'") . " limit 1)";
+	$q2 = db_query($sql);
+	if (!db_num_rows($q2)) {
+		print "<input type='radio' name='double_data' value='2' "; if ($double_data == 2) print "checked";
+		print "> {$lang['rights_52']} #2</td></tr>";
+	}
 } else {
-    //Leave double_data as hidden field if not a Double Data Entry project
-    print "<input type='hidden' name='double_data' value='$double_data'>";
+	//Leave double_data as hidden field if not a Double Data Entry project
+	print "<input type='hidden' name='double_data' value='$double_data'>";
 }
-
-// 기존 Double Data Entry
-//    $sql = "(select 1 from redcap_user_roles where double_data = '1' and project_id = $project_id " . ($isRole ? "and role_id != $role_id" : "") . " limit 1)
-//			union
-//			(select 1 from redcap_user_rights where double_data = '1' and project_id = $project_id and role_id is null " . ($isRole ? "" : "and username != '".db_escape($user)."'") . " limit 1)";
-//	$q1 = db_query($sql);
-//	if (!db_num_rows($q1)) {
-//		print "<input type='radio' name='double_data' value='1' ";
-//		if ($double_data == 1) print "checked";
-//		print "> {$lang['rights_52']} #1<br>";
-//	}
-//	$sql = "(select 1 from redcap_user_roles where double_data = '2' and project_id = $project_id " . ($isRole ? "and role_id != $role_id" : "") . " limit 1)
-//			union
-//			(select 1 from redcap_user_rights where double_data = '2' and project_id = $project_id and role_id is null " . ($isRole ? "" : "and username != '".db_escape($user)."'") . " limit 1)";
-//	$q2 = db_query($sql);
-//	if (!db_num_rows($q2)) {
-//		print "<input type='radio' name='double_data' value='2' ";
-//        if ($double_data == 2) print "checked";
-//		print "> {$lang['rights_52']} #2</td></tr>";
-//	}
-//} else {
-//	//Leave double_data as hidden field if not a Double Data Entry project
-//	print "<input type='hidden' name='double_data' value='$double_data'>";
-//}
 
 print "<tr><td valign='top'><i class=\"fas fa-file-import\"></i>&nbsp;&nbsp;{$lang['app_01']} </td><td style='padding-top:2px;' valign='top'> <input type='checkbox' name='data_import_tool' ";	if ($data_import_tool == 1) print "checked";
 print "> </td></tr>
