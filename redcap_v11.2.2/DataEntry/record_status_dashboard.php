@@ -566,6 +566,9 @@ $prev_form = $prev_event = null;
 $rowclass = "even";
 foreach ($formStatusValues as $this_record=>$rec_attr)
 {
+    if($user_rights['role_id'] > 0 && strpos($this_record, "--")){
+        continue;
+    }
 	// For each record (i.e. row), loop through all forms/events
     // 대시보드 리스트
 	$this_row = RCView::td(array('style'=>'font-size:12px;'),
