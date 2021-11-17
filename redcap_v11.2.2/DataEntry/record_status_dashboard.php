@@ -567,7 +567,6 @@ $rowclass = "even";
 foreach ($formStatusValues as $this_record=>$rec_attr)
 {
 	// For each record (i.e. row), loop through all forms/events
-    // 대시보드 리스트
 	$this_row = RCView::td(array('style'=>'font-size:12px;'),
 					RCView::a(array('href'=>APP_PATH_WEBROOT . "DataEntry/record_home.php?pid=$project_id&arm=$arm&id=".htmlspecialchars(removeDDEending($this_record), ENT_QUOTES),
 							'style'=>'text-decoration:underline;font-size:13px;'), htmlspecialchars(removeDDEending($this_record), ENT_QUOTES)) .
@@ -880,7 +879,7 @@ $autoIdBtnText = $auto_inc_set ? $lang['data_entry_46'] : $lang['data_entry_443'
 if ($multiple_arms) {
     $autoIdBtnText .= " " . $lang['data_entry_442'];
 }
-if (!$auto_inc_set && $user_rights['record_create'] > 0 && $user_rights['double_data'] == 0)
+if (!$auto_inc_set && $user_rights['record_create'] > 0)
 {
     // Check if record ID field should have validation
     $text_val_string = "";
@@ -941,45 +940,6 @@ if (!$auto_inc_set && $user_rights['record_create'] > 0 && $user_rights['double_
     </script>
     <?php
 }
-
-// Analyst Subject Select
-$sql_SubjectList = "SELECT record FROM redcap_record_list WHERE project_id = $project_id AND record NOT LIKE '%--%'";
-$q = db_query($sql_SubjectList);
-while ($result = db_fetch_assoc($q)){
-    $subject_arr[] = $result['record'];
-}
-foreach ($formStatusValues as $this_record=>$rec_attr){
-    $subject_DDE[] = removeDDEending($this_record);
-}
-$subjectList_arr = array_diff($subject_arr, $subject_DDE);
-
-if(!$auto_inc_set && $user_rights['double_data'] > 0){ ?>
-    <div class="input-group mb-4">
-        <select id="selectSubject" class="x-form-text x-form-field" style="width:<?=($multiple_arms ? '250' : '180')?>px;">
-            <option value="">-- Analysis List --</option>
-            <?php foreach ($subjectList_arr as $subjectList){ ?>
-                <option value=<?= $subjectList ?>><?= RCView::escape(strip_tags2("{$subjectList}")) ?></option>
-            <?php } ?>
-        </select>
-        <div class="input-group-append">
-            <button class="btn btn-xs btn-rcgreen fs14" onclick="selectSubj();"><i class="fas fa-plus"></i> Select </button>
-        </div>
-    </div>
-
-    <script type="text/javascript">
-        function selectSubj(){
-            var subjectName = $('#selectSubject').val();
-            if(subjectName === ""){
-                alert("Subject is not Selected");
-                return;
-            }
-            window.location.href = app_path_webroot+'DataEntry/record_home.php?pid='+pid+'&arm=<?php echo getArm() ?>&id=' + subjectName;
-        }
-    </script>
-    <?php
-}
-
-
 // Auto-number button(s) - if option is enabled
 elseif ($auto_inc_set && $user_rights['record_create'] > 0)
 {
