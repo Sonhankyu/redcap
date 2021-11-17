@@ -951,15 +951,15 @@ while ($result = db_fetch_assoc($q)){
 foreach ($formStatusValues as $this_record=>$rec_attr){
     $subject_DDE[] = removeDDEending($this_record);
 }
-$subjectList_arr = array_diff($subject_arr, $subject_DDE);
-
 if(!$auto_inc_set && $user_rights['double_data'] > 0){ ?>
     <div class="input-group mb-4">
         <select id="selectSubject" class="x-form-text x-form-field" style="width:<?=($multiple_arms ? '250' : '180')?>px;">
             <option value="">-- Analysis List --</option>
-            <?php foreach ($subjectList_arr as $subjectList){ ?>
+            <?php foreach ($subject_arr as $subjectList){
+                if(!in_array($subjectList, $subject_DDE)){?>
                 <option value=<?= $subjectList ?>><?= RCView::escape(strip_tags2("{$subjectList}")) ?></option>
-            <?php } ?>
+            <?php }
+            }?>
         </select>
         <div class="input-group-append">
             <button class="btn btn-xs btn-rcgreen fs14" onclick="selectSubj();"><i class="fas fa-plus"></i> Select </button>
