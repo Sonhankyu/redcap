@@ -564,6 +564,7 @@ $arm_id = $Proj->getArmIdFromArmNum($arm);
 // ADD ROWS: Get form status values for all records/events/forms and loop through them
 $prev_form = $prev_event = null;
 $rowclass = "even";
+print_array($formStatusValues['000000A']['42']['analysis']['1']);
 foreach ($formStatusValues as $this_record=>$rec_attr)
 {
     if($user_rights['role_id'] > 0 && strpos($this_record, "--")){
@@ -617,15 +618,18 @@ foreach ($formStatusValues as $this_record=>$rec_attr)
 	$esignimgStatic = trim(RCView::img(array('class'=>'esign', 'src'=>'tick_shield_small.png')));
 	$lockimgMultipleStatic  = trim(RCView::img(array('class'=>'lock', 'src'=>'locks_small.png')));
 	$esignimgMultipleStatic = trim(RCView::img(array('class'=>'esign', 'src'=>'tick_shields_small.png')));
-	foreach ($formsEvents as $attr)
+    foreach ($formsEvents as $attr)
 	{
-			// Determine status
+			// Determine status <- 아이콘 상태 부분
+            // $rec_attr -> 이벤트 id array
 			$this_status_array = (isset($rec_attr[$attr['event_id']][$attr['form_name']]) && is_array($rec_attr[$attr['event_id']][$attr['form_name']])) ? $rec_attr[$attr['event_id']][$attr['form_name']] : [];
 			$status_concat = trim(implode('', $this_status_array));
 			$status_count = count(array_keys($this_status_array));
 			$status_value_count = strlen($status_concat);
 			$form_has_mixed_statuses = false;
 			$form_has_multiple_instances = ($status_count > 1);
+            print_array($rec_attr['42']);
+//            print_array($rec_attr[$attr['event_id']]['analysis']);
 			if ($form_has_multiple_instances) {
 				// Determine if all statuses are same or mixed status values
 				$all0s = (str_replace('0', '', $status_concat) == '');
@@ -659,6 +663,7 @@ foreach ($formStatusValues as $this_record=>$rec_attr)
 					}
 				} else {
 					// Set image HTML
+                    //  222222200200220002022
 					if ($this_status_array == '2') {
 						$img = ($form_has_multiple_instances) ? 'circle_green_stack.png' : 'circle_green.png';
 					} elseif ($this_status_array == '1') {
@@ -713,6 +718,7 @@ foreach ($formStatusValues as $this_record=>$rec_attr)
 				$onclick = "";
 			}
 			// Add cell
+        // 각 아이콘 출력
 			$td = "$lockingEsignImg<a href='$href' $onclick style='text-decoration:none;'><img src='".APP_PATH_IMAGES."$img' class='fstatus' style='$statusIconStyle'></a>$addRptBtn";
 		//}
 		// Determine grouping class (longitudinal only)
