@@ -28,26 +28,26 @@ if (!isset($_SESSION['username']) && $_SERVER['SERVER_NAME'] == 'redcap.vanderbi
 }
 
 // Welcome message and instroduction
-print  "<div>
-			<div style='float:left;font-weight:bold;'>{$lang['info_01']}</div>
-			<div class='".(isset($_SESSION['username']) ? 'd-block d-sm-none' : 'd-none')."' style='float:right;margin-right:20px;'>
-				<button class='jqbuttonmed' onclick=\"window.location.href = '".APP_PATH_WEBROOT_PARENT."index.php?action=myprojects';\"><img src='".APP_PATH_IMAGES."folders_stack.png'> <span style='vertical-align:middle;'>{$lang['setup_45']} {$lang['bottom_03']}</span></button>
-			</div>
-			<div class='clear'></div>
-		</div>
-		<p>
-			{$lang['info_44']}
-		</p>
-		<p>
-			{$lang['info_35']}
-		</p>
-		<p>
-			{$lang['info_36']}
-			<i class=\"fas fa-film\"></i> <a href='javascript:;' onclick=\"popupvid('redcap_overview_brief02','Brief Overview of REDCap')\" style='text-decoration:underline;'>{$lang['info_37']}</a>{$lang['period']}
-			{$lang['info_38']}
-			<a href='index.php?action=training' style='text-decoration:underline;'>{$lang['info_06']}</a>
-			{$lang['global_14']}{$lang['period']}<br>
-		</p>";
+//print  "<div>
+//			<div style='float:left;font-weight:bold;'>{$lang['info_01']}</div>
+//			<div class='".(isset($_SESSION['username']) ? 'd-block d-sm-none' : 'd-none')."' style='float:right;margin-right:20px;'>
+//				<button class='jqbuttonmed' onclick=\"window.location.href = '".APP_PATH_WEBROOT_PARENT."index.php?action=myprojects';\"><img src='".APP_PATH_IMAGES."folders_stack.png'> <span style='vertical-align:middle;'>{$lang['setup_45']} {$lang['bottom_03']}</span></button>
+//			</div>
+//			<div class='clear'></div>
+//		</div>
+//		<p>
+//			{$lang['info_44']}
+//		</p>
+//		<p>
+//			{$lang['info_35']}
+//		</p>
+//		<p>
+//			{$lang['info_36']}
+//			<i class=\"fas fa-film\"></i> <a href='javascript:;' onclick=\"popupvid('redcap_overview_brief02','Brief Overview of REDCap')\" style='text-decoration:underline;'>{$lang['info_37']}</a>{$lang['period']}
+//			{$lang['info_38']}
+//			<a href='index.php?action=training' style='text-decoration:underline;'>{$lang['info_06']}</a>
+//			{$lang['global_14']}{$lang['period']}<br>
+//		</p>";
 
 // Show grant name to cite (if exists)
 if (trim($homepage_grant_cite) != "") {
@@ -59,18 +59,18 @@ if (trim($homepage_grant_cite) != "") {
 
 // Notice about usage for human subject research
 ?>
-<p style='color:#C00000;'>
-	<i><?php echo $lang['global_03'].$lang['colon'] ?></i> <?php echo $lang['info_10'] ?>
-</p>
+<!--<p style='color:#C00000;'>-->
+<!--	<i>--><?php //echo $lang['global_03'].$lang['colon'] ?><!--</i> --><?php //echo $lang['info_10'] ?>
+<!--</p>-->
 
 <?php
 
-print  "<p>
-			{$lang['info_11']}
-			<a style='text-decoration:underline;' href='".
-			(trim($homepage_contact_url) == '' ? "mailto:$homepage_contact_email" : trim($homepage_contact_url)) .
-			"'>$homepage_contact</a>{$lang['period']}
-		</p>";
+//print  "<p>
+//			{$lang['info_11']}
+//			<a style='text-decoration:underline;' href='".
+//			(trim($homepage_contact_url) == '' ? "mailto:$homepage_contact_email" : trim($homepage_contact_url)) .
+//			"'>$homepage_contact</a>{$lang['period']}
+//		</p>";
 
 // Show custom text defined by REDCap adminstrator on System Config page
 if (trim($homepage_custom_text) != "") {
@@ -83,19 +83,19 @@ print  "</div>";
 print  "<div class='col-11 col-md-6'>";
 
 // Features of REDCap (right-hand side)
-print  '<div class="well" style="font-size:12px;">
-				<h6 class="fs18 mb-3" style="text-align:center;margin-top:0;color:#C00000;">
-					'.$lang['info_12'].'
-				</h6>
-				<p>
-					<b>'.$lang['info_47'].'</b> - '.$lang['info_48'].'
-				</p>
-				<p>
-					<b>'.$lang['info_15'].'</b> - '.$lang['info_49'].'
-				</p>'.
-                "				<p>
-					<b>{$lang['info_50']}</b> - {$lang['info_28']}, {$lang['info_29']}, {$lang['info_30']}
-				</p>";
+//print  '<div class="well" style="font-size:12px;">
+//				<h6 class="fs18 mb-3" style="text-align:center;margin-top:0;color:#C00000;">
+//					'.$lang['info_12'].'
+//				</h6>
+//				<p>
+//					<b>'.$lang['info_47'].'</b> - '.$lang['info_48'].'
+//				</p>
+//				<p>
+//					<b>'.$lang['info_15'].'</b> - '.$lang['info_49'].'
+//				</p>'.
+//                "				<p>
+//					<b>{$lang['info_50']}</b> - {$lang['info_28']}, {$lang['info_29']}, {$lang['info_30']}
+//				</p>";
 if ($pdf_econsent_system_enabled) {
 	print '		<p>
 					<b>' . $lang['info_45'] . '</b> - ' . $lang['info_46'] . '

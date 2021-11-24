@@ -269,10 +269,13 @@ if (!empty($user_rights))
 //	}
 
 	// If user is on grid page or data entry page and record is selected, make grid icon a link back to grid page
-	$dataEntry .=  "<div class='hang' style='position:relative;'>
-                        <i class=\"fas fa-file-alt fs14\" style='color:#900000;text-indent:0;margin-left:2px;margin-right:1px;'></i>&nbsp;&nbsp;<a href='".APP_PATH_WEBROOT."DataEntry/record_home.php?pid=$project_id' style='color:#A00000;'>".
-						($user_rights['record_create'] ? $lang['bottom_62'] : $lang['bottom_72'])."</a>
-					</div>";
+    if($user_rights['record_create']){
+        $dataEntry .=  "<div class='hang' style='position:relative;'>
+                            <i class=\"fas fa-file-alt fs14\" style='color:#900000;text-indent:0;margin-left:2px;margin-right:1px;'></i>&nbsp;&nbsp;<a href='".APP_PATH_WEBROOT."DataEntry/record_home.php?pid=$project_id' style='color:#A00000;'>
+                            ". $lang['bottom_62'] ."</a>
+					    </div>";
+    }
+
 //	if ($status < 1) {
 //		$dataEntry .=  "<div class='menuboxsub' style='position:relative;'>- ".
 //						(($user_rights['record_create'] && ($user_rights['forms'][$Proj->firstForm] == '1' || $user_rights['forms'][$Proj->firstForm] == '3')) ? $lang['bottom_64'] : $lang['bottom_73'])."</div>";
@@ -329,11 +332,11 @@ if (!empty($user_rights))
 										) .
 										$record_display2
 									) .
-									RCView::div(array('style'=>'float:right;'),
-										RCView::a(array('id'=>'menuLnkChooseOtherRec','class'=>'opacity65','href'=>APP_PATH_WEBROOT."DataEntry/record_home.php?pid=$project_id"),
-											$lang['bottom_63']
-										)
-									) .
+//									RCView::div(array('style'=>'float:right;'),
+//										RCView::a(array('id'=>'menuLnkChooseOtherRec','class'=>'opacity65','href'=>APP_PATH_WEBROOT."DataEntry/record_home.php?pid=$project_id"),
+//											$lang['bottom_63']
+//										)
+//									) .
 									RCView::div(array('class'=>'clear'), '')
 								);
 		}
@@ -428,6 +431,70 @@ if (!empty($user_rights))
  * APPLICATIONS MENU
  * Show function links based on rights level (Don't allow designated Double Data Entry people to see pages displaying other user's data.)
  */
+$repeatingFormsEvents = $Proj->getRepeatingFormsEvents();
+$hasRepeatingForms = $Proj->hasRepeatingForms();
+$hasRepeatingEvents = $Proj->hasRepeatingEvents();
+$hasRepeatingFormsOrEvents = ($hasRepeatingForms || $hasRepeatingEvents);
+
+$imgCollapsed = $appsMenuCollapsed ? "toggle-expand.png" : "toggle-collapse.png";
+$statusIconTitle = "<div style='float:left'>Status Icons</div>
+                        <div class='opacity65 projMenuToggle' id='$menu_id'>"
+    . RCView::a(array('href'=>'javascript:;'),
+        RCView::img(array('src'=>$imgCollapsed, 'class'=>($isIE ? 'opacity65' : '')))
+    ) . "
+				   </div>";
+$statusIcon = RCView::div(array('id'=>'rsd_legend', 'class'=>'chklist', 'style'=>(is_numeric($rd_id) ? 'display:none;' : '').'background-color:#eee;border:1px solid #ccc;'),
+    RCView::table(array('id'=>'status-icon-legend'),
+        RCView::tr('').
+        RCView::td(array('class'=>'nowrap', 'style'=>''),
+            RCView::img(array('src'=>'circle_gray.png')) . $lang['global_92'] . " " . $lang['data_entry_205'] .
+            RCView::a(array('href'=>'javascript:;', 'class'=>'help', 'title'=>$lang['global_58'], 'onclick'=>"simpleDialog('".js_escape($lang['data_entry_232'])."','".js_escape($lang['global_92'] . " " . $lang['data_entry_205'])."');"), '?')
+        )
+    ) .
+    RCView::tr('',
+        RCView::td(array('class'=>'nowrap', 'style'=>'padding-right:5px;'),
+            RCView::img(array('src'=>'circle_red.png')) . $lang['global_92']
+        ) .
+        RCView::tr('',
+            RCView::td(array('class'=>'nowrap', 'style'=>'padding-right:5px;'),
+                RCView::img(array('src'=>'circle_yellow.png')) . $lang['global_93']
+            ) .
+            RCView::td(array('class'=>'nowrap', 'style'=>''),
+                ($surveys_enabled
+                    ? RCView::img(array('src'=>'circle_orange_tick.png')) . $lang['global_95']
+                    : (!$hasRepeatingFormsOrEvents ? "" :
+                        (RCView::img(array('src'=>'circle_green_stack.png')) . RCView::img(array('src'=>'circle_yellow_stack.png', 'style'=>'position:relative;left:-6px;')) .
+                            RCView::img(array('src'=>'circle_red_stack.png', 'style'=>'position:relative;left:-12px;')) .
+                            RCView::span(array('style'=>'position:relative;left:-12px;'), $lang['data_entry_282'])))
+                )
+            )
+        ) .
+        RCView::tr('',
+            RCView::td(array('class'=>'nowrap', 'style'=>'padding-right:5px;'),
+                RCView::img(array('src'=>'circle_green.png')) . $lang['survey_28']
+            ) .
+            RCView::td(array('class'=>'nowrap', 'style'=>''),
+                ($surveys_enabled
+                    ? RCView::img(array('src'=>'circle_green_tick.png')) . $lang['global_94']
+                    : (!$hasRepeatingFormsOrEvents ? "" : RCView::img(array('src'=>'circle_blue_stack.png')) . $lang['data_entry_281'])
+                )
+            )
+        ) .
+        ( !($hasRepeatingFormsOrEvents && $surveys_enabled) ? "" :
+            RCView::tr('',
+                RCView::td(array('class'=>'nowrap', 'style'=>'padding-right:5px;'),
+                    RCView::img(array('src'=>'circle_blue_stack.png')) . $lang['data_entry_281']
+                ) .
+                RCView::td(array('class'=>'nowrap', 'style'=>''),
+                    RCView::img(array('src'=>'circle_green_stack.png')) . RCView::img(array('src'=>'circle_yellow_stack.png', 'style'=>'position:relative;left:-6px;')) .
+                    RCView::img(array('src'=>'circle_red_stack.png', 'style'=>'position:relative;left:-12px;')) .
+                    RCView::span(array('style'=>'position:relative;left:-12px;'), $lang['data_entry_282'])
+                )
+            )
+        )
+    )
+);
+
 $menu_id = 'projMenuApplications';
 $appsMenuCollapsed = UIState::getMenuCollapseState($project_id, $menu_id);
 $imgCollapsed = $appsMenuCollapsed ? "toggle-expand.png" : "toggle-collapse.png";
@@ -641,8 +708,9 @@ if (isset($_GET['pid']) && is_numeric($_GET['pid']))
 	$westHtml = renderPanel('', $logoHtml)
               . renderPanel($homeSetupMenuTitle, $homeSetupMenu, 'home_setup_panel', $homeSetupMenuCollapsed)
 			  . renderPanel((isset($dataEntryTitle) ? $dataEntryTitle : ''), (isset($dataEntry) ? $dataEntry : ''), '', $dataEntryCollapsed)
-			  .renderPanel($appsMenuTitle, $appsMenu, 'app_panel', $appsMenuCollapsed);
-	
+			  . renderPanel($appsMenuTitle, $appsMenu, 'app_panel', $appsMenuCollapsed)
+              . renderPanel($statusIconTitle, $statusIcon,'');
+
 	if ($externalLinkage != "") {
 		$westHtml .= $externalLinkage;
 	}

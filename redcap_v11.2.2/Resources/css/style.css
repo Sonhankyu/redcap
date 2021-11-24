@@ -2053,7 +2053,7 @@ textarea {
 #south table td { color:#888; font-size:11px; padding:6px 10px 0 10px; }
 #south table td a { text-decoration:none;font-weight:normal;font-size:11px;-webkit-text-size-adjust:none; }
 #center { background-color:#fff;padding:0px 0px 60px 20px; }
-#west { min-width:305px;width:305px;background-color:#fff;padding:0;line-height:1.5;border-right:1px solid #D0D0D0;border-bottom:1px solid #D0D0D0; }
+#west { min-width:305px;width:305px;height:100%;background-color:#fff;padding:0;line-height:1.5;border-right:1px solid #D0D0D0;border-bottom:1px solid #D0D0D0; }
 
 #subheader {
 	text-align:left;

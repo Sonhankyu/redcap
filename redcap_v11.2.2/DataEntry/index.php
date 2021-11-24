@@ -753,6 +753,10 @@ print	RCView::div(array('id'=>'dataEntryTopOptions'),
                 arr.push(document.getElementsByName("ckbox")[i].value);
             }
         }
+        if(Array.isArray(arr) && arr.length === 0){
+            simpleDialog("No Image Selected");
+            return;
+        }
         window.open(app_path_webroot+'WebViewer/index.php?url='+arr);
     }
     function checkAllList(box) {
