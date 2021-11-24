@@ -113,7 +113,7 @@ if ($multiple_arms && is_numeric($dashboard['arm'])) {
 $selected_forms_events_array = RecordDashboard::convertSelectedFormsEventsFromBackendAsArray($dashboard['selected_forms_events']);
 
 // Set dashboard title and instructions
-$instructions = ($dashboard['rd_id'] == '') ? $lang['data_entry_176'] : trim(filter_tags($dashboard['description']));
+$instructions = ($dashboard['rd_id'] == '') ? '' : trim(filter_tags($dashboard['description']));
 $title = ($dashboard['rd_id'] == '') ? "{$lang['global_91']} {$lang['bottom_61']}" : strip_tags($dashboard['title']);
 
 // Set vertical/horizontal orientation values for table headers
@@ -564,6 +564,8 @@ $arm_id = $Proj->getArmIdFromArmNum($arm);
 // ADD ROWS: Get form status values for all records/events/forms and loop through them
 $prev_form = $prev_event = null;
 $rowclass = "even";
+//print_array($formStatusValues['test02']['65']['crf'][1]);
+//print_array($recordNamesThisPage);
 foreach ($formStatusValues as $this_record=>$rec_attr)
 {
     if($user_rights['role_id'] > 0 && strpos($this_record, "--")){
@@ -617,15 +619,17 @@ foreach ($formStatusValues as $this_record=>$rec_attr)
 	$esignimgStatic = trim(RCView::img(array('class'=>'esign', 'src'=>'tick_shield_small.png')));
 	$lockimgMultipleStatic  = trim(RCView::img(array('class'=>'lock', 'src'=>'locks_small.png')));
 	$esignimgMultipleStatic = trim(RCView::img(array('class'=>'esign', 'src'=>'tick_shields_small.png')));
-	foreach ($formsEvents as $attr)
+    foreach ($formsEvents as $attr)
 	{
-			// Determine status
+			// Determine status <- 아이콘 상태 부분
+            // $rec_attr -> 이벤트 id array
 			$this_status_array = (isset($rec_attr[$attr['event_id']][$attr['form_name']]) && is_array($rec_attr[$attr['event_id']][$attr['form_name']])) ? $rec_attr[$attr['event_id']][$attr['form_name']] : [];
 			$status_concat = trim(implode('', $this_status_array));
 			$status_count = count(array_keys($this_status_array));
 			$status_value_count = strlen($status_concat);
 			$form_has_mixed_statuses = false;
 			$form_has_multiple_instances = ($status_count > 1);
+//            print_array($rec_attr[$attr['event_id']]['analysis']);
 			if ($form_has_multiple_instances) {
 				// Determine if all statuses are same or mixed status values
 				$all0s = (str_replace('0', '', $status_concat) == '');
@@ -713,6 +717,7 @@ foreach ($formStatusValues as $this_record=>$rec_attr)
 				$onclick = "";
 			}
 			// Add cell
+        // 각 아이콘 출력
 			$td = "$lockingEsignImg<a href='$href' $onclick style='text-decoration:none;'><img src='".APP_PATH_IMAGES."$img' class='fstatus' style='$statusIconStyle'></a>$addRptBtn";
 		//}
 		// Determine grouping class (longitudinal only)
@@ -816,63 +821,63 @@ print	RCView::table(array('class'=>'d-none d-sm-block', 'style'=>'max-width:950p
 					(!is_numeric($rd_id) ? '' :
 						RCView::a(array('href'=>'javascript:;', 'style'=>'text-decoration:underline;display:block;margin:10px 0 0 50px;', 
 							'onclick'=>"$(this).remove();$('#rsd_legend_td').css('vertical-align','bottom');$('#rsd_legend').show();"), $lang['data_entry_353'])
-					) .
-					// Legend
-					RCView::div(array('id'=>'rsd_legend', 'class'=>'chklist', 'style'=>(is_numeric($rd_id) ? 'display:none;' : '').'background-color:#eee;border:1px solid #ccc;'),
-						RCView::table(array('id'=>'status-icon-legend'),
-							RCView::tr('',
-								RCView::td(array('colspan'=>'2', 'style'=>'font-weight:bold;'),
-									$lang['data_entry_178']
-								)
-							) .
-							RCView::tr('',
-								RCView::td(array('class'=>'nowrap', 'style'=>'padding-right:5px;'),
-									RCView::img(array('src'=>'circle_red.png')) . $lang['global_92']
-								) .
-								RCView::td(array('class'=>'nowrap', 'style'=>''),
-									RCView::img(array('src'=>'circle_gray.png')) . $lang['global_92'] . " " . $lang['data_entry_205'] .
-									RCView::a(array('href'=>'javascript:;', 'class'=>'help', 'title'=>$lang['global_58'], 'onclick'=>"simpleDialog('".js_escape($lang['data_entry_232'])."','".js_escape($lang['global_92'] . " " . $lang['data_entry_205'])."');"), '?')
-								)
-							) .
-							RCView::tr('',
-								RCView::td(array('class'=>'nowrap', 'style'=>'padding-right:5px;'),
-									RCView::img(array('src'=>'circle_yellow.png')) . $lang['global_93']
-								) .
-								RCView::td(array('class'=>'nowrap', 'style'=>''),
-									($surveys_enabled 
-										? RCView::img(array('src'=>'circle_orange_tick.png')) . $lang['global_95']
-										: (!$hasRepeatingFormsOrEvents ? "" :
-											(RCView::img(array('src'=>'circle_green_stack.png')) . RCView::img(array('src'=>'circle_yellow_stack.png', 'style'=>'position:relative;left:-6px;')) . 
-											RCView::img(array('src'=>'circle_red_stack.png', 'style'=>'position:relative;left:-12px;')) . 
-											RCView::span(array('style'=>'position:relative;left:-12px;'), $lang['data_entry_282'])))
-									)
-								)
-							) .
-							RCView::tr('',
-								RCView::td(array('class'=>'nowrap', 'style'=>'padding-right:5px;'),
-									RCView::img(array('src'=>'circle_green.png')) . $lang['survey_28']
-								) .
-								RCView::td(array('class'=>'nowrap', 'style'=>''),
-									($surveys_enabled 
-										? RCView::img(array('src'=>'circle_green_tick.png')) . $lang['global_94']
-										: (!$hasRepeatingFormsOrEvents ? "" : RCView::img(array('src'=>'circle_blue_stack.png')) . $lang['data_entry_281'])
-									)
-								)
-							) .
-							( !($hasRepeatingFormsOrEvents && $surveys_enabled) ? "" :
-								RCView::tr('',
-									RCView::td(array('class'=>'nowrap', 'style'=>'padding-right:5px;'),
-										RCView::img(array('src'=>'circle_blue_stack.png')) . $lang['data_entry_281']
-									) .
-									RCView::td(array('class'=>'nowrap', 'style'=>''),
-										RCView::img(array('src'=>'circle_green_stack.png')) . RCView::img(array('src'=>'circle_yellow_stack.png', 'style'=>'position:relative;left:-6px;')) . 
-										RCView::img(array('src'=>'circle_red_stack.png', 'style'=>'position:relative;left:-12px;')) . 
-										RCView::span(array('style'=>'position:relative;left:-12px;'), $lang['data_entry_282'])
-									)
-								)
-							)
-						)
 					)
+					// Legend
+//					RCView::div(array('id'=>'rsd_legend', 'class'=>'chklist', 'style'=>(is_numeric($rd_id) ? 'display:none;' : '').'background-color:#eee;border:1px solid #ccc;'),
+//						RCView::table(array('id'=>'status-icon-legend'),
+//							RCView::tr('',
+//								RCView::td(array('colspan'=>'2', 'style'=>'font-weight:bold;'),
+//									$lang['data_entry_178']
+//								)
+//							) .
+//							RCView::tr('',
+//								RCView::td(array('class'=>'nowrap', 'style'=>'padding-right:5px;'),
+//									RCView::img(array('src'=>'circle_red.png')) . $lang['global_92']
+//								) .
+//								RCView::td(array('class'=>'nowrap', 'style'=>''),
+//									RCView::img(array('src'=>'circle_gray.png')) . $lang['global_92'] . " " . $lang['data_entry_205'] .
+//									RCView::a(array('href'=>'javascript:;', 'class'=>'help', 'title'=>$lang['global_58'], 'onclick'=>"simpleDialog('".js_escape($lang['data_entry_232'])."','".js_escape($lang['global_92'] . " " . $lang['data_entry_205'])."');"), '?')
+//								)
+//							) .
+//							RCView::tr('',
+//								RCView::td(array('class'=>'nowrap', 'style'=>'padding-right:5px;'),
+//									RCView::img(array('src'=>'circle_yellow.png')) . $lang['global_93']
+//								) .
+//								RCView::td(array('class'=>'nowrap', 'style'=>''),
+//									($surveys_enabled
+//										? RCView::img(array('src'=>'circle_orange_tick.png')) . $lang['global_95']
+//										: (!$hasRepeatingFormsOrEvents ? "" :
+//											(RCView::img(array('src'=>'circle_green_stack.png')) . RCView::img(array('src'=>'circle_yellow_stack.png', 'style'=>'position:relative;left:-6px;')) .
+//											RCView::img(array('src'=>'circle_red_stack.png', 'style'=>'position:relative;left:-12px;')) .
+//											RCView::span(array('style'=>'position:relative;left:-12px;'), $lang['data_entry_282'])))
+//									)
+//								)
+//							) .
+//							RCView::tr('',
+//								RCView::td(array('class'=>'nowrap', 'style'=>'padding-right:5px;'),
+//									RCView::img(array('src'=>'circle_green.png')) . $lang['survey_28']
+//								) .
+//								RCView::td(array('class'=>'nowrap', 'style'=>''),
+//									($surveys_enabled
+//										? RCView::img(array('src'=>'circle_green_tick.png')) . $lang['global_94']
+//										: (!$hasRepeatingFormsOrEvents ? "" : RCView::img(array('src'=>'circle_blue_stack.png')) . $lang['data_entry_281'])
+//									)
+//								)
+//							) .
+//							( !($hasRepeatingFormsOrEvents && $surveys_enabled) ? "" :
+//								RCView::tr('',
+//									RCView::td(array('class'=>'nowrap', 'style'=>'padding-right:5px;'),
+//										RCView::img(array('src'=>'circle_blue_stack.png')) . $lang['data_entry_281']
+//									) .
+//									RCView::td(array('class'=>'nowrap', 'style'=>''),
+//										RCView::img(array('src'=>'circle_green_stack.png')) . RCView::img(array('src'=>'circle_yellow_stack.png', 'style'=>'position:relative;left:-6px;')) .
+//										RCView::img(array('src'=>'circle_red_stack.png', 'style'=>'position:relative;left:-12px;')) .
+//										RCView::span(array('style'=>'position:relative;left:-12px;'), $lang['data_entry_282'])
+//									)
+//								)
+//							)
+//						)
+//					)
 				)
 			)
 		);

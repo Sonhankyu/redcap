@@ -50,14 +50,7 @@ $result = mysqli_query($connect, $sql);
 while ($row = mysqli_fetch_array($result)) {
     $url_arr[] = '"./files/' . $row[0] . '"';
 }
-
-if (!empty($url_arr)){
-    $url = implode(", ", $url_arr);
-}else{
-    echo "<script>alert('No image selected')</script>";
-    echo "<script>window.close()</script>";
-}
-
+$url = implode(", ", $url_arr);
 
 ?>
 <!DOCTYPE html>
