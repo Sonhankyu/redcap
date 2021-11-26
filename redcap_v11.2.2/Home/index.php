@@ -73,7 +73,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'create')
 	print  '<div style="font-size: 18px;border-bottom:1px solid #aaa;padding-bottom:2px;margin-bottom:20px;">
 			<span class="fas fa-plus" aria-hidden="true"></span> '.$lang['home_03'].'
 			</div>';
-	print  "<p>{$lang['home_04']} ";
+//	print  "<p>{$lang['home_04']} ";
 	// If only super users are allowed to create new projects, then normal users will have email request sent to contact person for approval
 	if ($superusers_only_create_project && !$super_user) {
 		print  " {$lang['home_05']}<br><br></p>";
@@ -178,7 +178,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'create')
 				<td style='padding:15px 0 15px 5px;'>
 					<button type='button' class='btn btn-primaryrc' onclick=\"$certify_text_js; return false;\">$btn_text</button>
 					&nbsp; &nbsp; 
-					<button class='btn btn-defaultrc create-project-cancel-btn' onclick=\"window.location.href='{$_SERVER['PHP_SELF']}'; return false;\">{$lang['global_53']}</button>
+					<button class='btn btn-defaultrc create-project-cancel-btn' onclick=\"window.location.href='" . APP_PATH_WEBROOT_PARENT . "index.php?action=myprojects'; return false;\">{$lang['global_53']}</button>
 				</td>
 			</tr>";
 
@@ -405,16 +405,16 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'myprojects')
 	if (trim($homepage_announcement) != "") {
 		$homepage_announcement_html = RCView::div(array('style'=>'margin-bottom:10px;'), nl2br(decode_filter_tags($homepage_announcement)));
 	}
-	$html .=  "<div style='margin:0;padding:0;' class='d-none d-sm-block col-md-12'>
-				{$lang['home_59']}
-				<a href='javascript:;' style='text-decoration:underline;' onclick=\"$(this).remove();$('#myprojects-instructions').show('fade');\">{$lang['scheduling_78']}</a>
-				<span id='myprojects-instructions' style='display:none;'>
-					{$lang['home_60']} {$lang['home_07']} {$lang['home_63']}{$lang['home_09']}
-					{$lang['home_45']} {$lang['home_46']} {$lang['home_47']}
-					".(defined('SUPER_USER') && SUPER_USER ? " {$lang['home_44']} <img src='".APP_PATH_IMAGES."star_small2.png' style='vertical-align:middle;'>{$lang['period']}" : "")."
-				</span>
-				".(($user_access_dashboard_enable > 0 && !$displayUadBoxRed) ? $uadBoxGrayContent : "")."
-			</div>";
+//	$html .=  "<div style='margin:0;padding:0;' class='d-none d-sm-block col-md-12'>
+//				{$lang['home_59']}
+//				<a href='javascript:;' style='text-decoration:underline;' onclick=\"$(this).remove();$('#myprojects-instructions').show('fade');\">{$lang['scheduling_78']}</a>
+//				<span id='myprojects-instructions' style='display:none;'>
+//					{$lang['home_60']} {$lang['home_07']} {$lang['home_63']}{$lang['home_09']}
+//					{$lang['home_45']} {$lang['home_46']} {$lang['home_47']}
+//					".(defined('SUPER_USER') && SUPER_USER ? " {$lang['home_44']} <img src='".APP_PATH_IMAGES."star_small2.png' style='vertical-align:middle;'>{$lang['period']}" : "")."
+//				</span>
+//				".(($user_access_dashboard_enable > 0 && !$displayUadBoxRed) ? $uadBoxGrayContent : "")."
+//			</div>";
 
 	// UAD: Display time that user last accessed the project user access dashboard (if enabled and user has User Rights privileges in at least one project)
 	if ($displayUadBox)

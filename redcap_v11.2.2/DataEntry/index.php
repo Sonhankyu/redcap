@@ -645,17 +645,19 @@ print	RCView::div(array('id'=>'dataEntryTopOptions'),
 //					)
 //				)
 //            ).
-            RCView::div(array('id'=>'actionButton', 'class'=>'d-print-none'),
-                // "Actions:" text
-                RCView::span(array('style'=>'color:#777;margin-right:6px;'), $lang['edit_project_29']) .
-                RCView::button(array('onclick'=>"openViewer();", 'class'=>'jqbuttonmed'),
-                    RCView::span(array('style'=>'vertical-align:middle;color:#444;'), 'WebViewer')
-                )
-            ).
+//            RCView::div(array('id'=>'actionButton', 'class'=>'d-print-none'),
+//                // "Actions:" text
+//                RCView::span(array('style'=>'color:#777;margin-right:6px;'), $lang['edit_project_29'])
+//
+//            ).
 
             // Image List Table
             RCView::div(array('id'=>'dcmImageList'),
-                RCView::div(array('id'=>'list-title', 'style'=>'margin-top:20px; color:#800000;font-size:16px;font-weight:bold;'),"Image") .
+                RCView::div(array('id'=>'list-title', 'style'=>'margin-top:20px; color:#800000;font-size:16px;font-weight:bold;'),"Image" . '&nbsp;&nbsp;' .
+                    RCView::button(array('onclick'=>"openViewer();", 'class'=>'jqbuttonmed'),
+                        RCView::span(array('style'=>'vertical-align:middle;color:#444;'), 'WebViewer')
+                    )
+                ) .
                 RCView::table(array('class'=>'imageTable labelrc col-12','style'=>'margin-top:10px;'),
                     RCView::thead(array('style'=>''),
                         RCView::tr(array(),
@@ -1850,7 +1852,7 @@ elseif (isset($_GET['id']))
 	}
 
 	// Floating "Save" button tooltip fixed at top-right of data entry page
-	print RCView::div(array('id'=>'formSaveTip'), "");
+//	print RCView::div(array('id'=>'formSaveTip'), "");
 
 	// Floating "Save" button tooltip for Data Resolution Workflow (Save + Open DRW dialog)
 	print RCView::div(array('id'=>'tooltipDRWsave', 'class'=>'tooltip4left'), "");

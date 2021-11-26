@@ -411,24 +411,23 @@ class DataEntry
 			<?php
 			
 			## General instructions for grid.
-			print	RCView::table(array('style'=>'width:800px;table-layout:fixed;'),
+			print	RCView::table(array('style'=>'max-width: 950px; table-layout: fixed;'),
 					RCView::tr('',
-						RCView::td(array('style'=>'padding:0 30px 0 0;','valign'=>'top'),
+//						RCView::td(array('style'=>'padding:0 30px 0 0;','valign'=>'top'),
 							// Instructions
-							RCView::div(array('class'=>'d-none d-sm-block', 'style'=>'padding-top:10px'),
-								$lang['grid_41'] .
-								// (!($longitudinal && $user_rights['design'] && !isset($_SESSION[FhirEhr::$session_data_name])) ? "" : "
-								(!($longitudinal && $user_rights['design']) ? "" : "
-									{$lang['grid_21']}
-									<a href='".APP_PATH_WEBROOT."Design/define_events.php?pid=$project_id'
-										style='text-decoration:underline;'>{$lang['global_16']}</a>
-									{$lang['global_14']}{$lang['period']}"
-								)
-							) .
-							// Actions for locking
-							$actions
-						) .
-						RCView::td(array('class'=>'d-none d-sm-block', 'valign'=>'top','style'=>($hasRepeatingFormsOrEvents && $surveys_enabled ? 'width:400px;' : 'width:320px;')),
+//							RCView::div(array('class'=>'d-none d-sm-block', 'style'=>'padding-top:10px'),
+//								$lang['grid_41'] .
+//								// (!($longitudinal && $user_rights['design'] && !isset($_SESSION[FhirEhr::$session_data_name])) ? "" : "
+//								(!($longitudinal && $user_rights['design']) ? "" : "
+//									{$lang['grid_21']}
+//									<a href='".APP_PATH_WEBROOT."Design/define_events.php?pid=$project_id'
+//										style='text-decoration:underline;'>{$lang['global_16']}</a>
+//									{$lang['global_14']}{$lang['period']}"
+//								)
+//							) .
+//						) .
+//						RCView::td(array('class'=>'d-none d-sm-block', 'valign'=>'top','style'=>($hasRepeatingFormsOrEvents && $surveys_enabled ? 'width:400px;' : 'width:320px;')),
+						RCView::td(array('class'=>'d-none d-sm-block', 'valign'=>'top'),
 							// Legend
 							RCView::div(array('class'=>'chklist','style'=>'background-color:#eee;border:1px solid #ccc;'),
 								RCView::table(array('id'=>'status-icon-legend'),
@@ -438,31 +437,29 @@ class DataEntry
 										)
 									) .
 									RCView::tr('',
-										RCView::td(array('class'=>'nowrap', 'style'=>'padding-right:5px;'),
-											RCView::img(array('src'=>'circle_red.png')) . $lang['global_92']
-										) .
 										RCView::td(array('class'=>'nowrap', 'style'=>''),
 											RCView::img(array('src'=>'circle_gray.png')) . $lang['global_92'] . " " . $lang['data_entry_205'] .
 											RCView::a(array('href'=>'javascript:;', 'class'=>'help', 'title'=>$lang['global_58'], 'onclick'=>"simpleDialog('".js_escape($lang['data_entry_232'])."','".js_escape($lang['global_92'] . " " . $lang['data_entry_205'])."');"), '?')
-										)
-									) .
-									RCView::tr('',
+										) .
+										RCView::td(array('class'=>'nowrap', 'style'=>'padding-right:5px;'),
+											RCView::img(array('src'=>'circle_red.png')) . $lang['global_92']
+										) .
 										RCView::td(array('class'=>'nowrap', 'style'=>'padding-right:5px;'),
 											RCView::img(array('src'=>'circle_yellow.png')) . $lang['global_93']
 										) .
-										RCView::td(array('class'=>'nowrap', 'style'=>''),
-											($surveys_enabled 
-												? RCView::img(array('src'=>'circle_orange_tick.png')) . $lang['global_95']
-												: (!$hasRepeatingFormsOrEvents ? "" :
-													(RCView::img(array('src'=>'circle_green_stack.png')) . RCView::img(array('src'=>'circle_yellow_stack.png', 'style'=>'position:relative;left:-6px;')) . 
-													RCView::img(array('src'=>'circle_red_stack.png', 'style'=>'position:relative;left:-12px;')) . 
-													RCView::span(array('style'=>'position:relative;left:-12px;'), $lang['data_entry_282'])))
-											)
+										RCView::td(array('class'=>'nowrap', 'style'=>'padding-right:5px;'),
+											RCView::img(array('src'=>'circle_green.png')) . $lang['survey_28']
 										)
 									) .
 									RCView::tr('',
-										RCView::td(array('class'=>'nowrap', 'style'=>'padding-right:5px;'),
-											RCView::img(array('src'=>'circle_green.png')) . $lang['survey_28']
+										RCView::td(array('class'=>'nowrap', 'style'=>''),
+											($surveys_enabled
+												? RCView::img(array('src'=>'circle_orange_tick.png')) . $lang['global_95']
+												: (!$hasRepeatingFormsOrEvents ? "" :
+													(RCView::img(array('src'=>'circle_green_stack.png')) . RCView::img(array('src'=>'circle_yellow_stack.png', 'style'=>'position:relative;left:-6px;')) .
+													RCView::img(array('src'=>'circle_red_stack.png', 'style'=>'position:relative;left:-12px;')) .
+													RCView::span(array('style'=>'position:relative;left:-12px;'), $lang['data_entry_282'])))
+											)
 										) .
 										RCView::td(array('class'=>'nowrap', 'style'=>''),
 											($surveys_enabled 
@@ -488,6 +485,9 @@ class DataEntry
 						)
 					)
 				);
+            // Actions for locking
+			print $actions;
+
 			// Check if record exists for other arms, and if so, notify the user (only for informational purposes)
 			if (Records::recordExistOtherArms($id, $arm))
 			{
