@@ -197,9 +197,9 @@ class HtmlPage
 		// Display REDCap copyright (but not in Mobile Site view), and for survey pages only display "Powered by REDCap"
 		$isSurveyPage = (PAGE == "surveys/index.php" || (defined("NOAUTH") && isset($_GET['s'])));
 		$copyrightText = $isSurveyPage ? 'Powered by REDCap</a>' : 'REDCap ' . $redcap_version . '</a> - &copy; ' . date("Y") . ' Vanderbilt University';
-		print 	'<div id="footer" class="d-none d-sm-block col-md-12" aria-hidden="true">' .
-					'<a href="https://projectredcap.org" tabindex="-1" target="_blank">' . $copyrightText .
-				'</div>';
+//		print 	'<div id="footer" class="d-none d-sm-block col-md-12" aria-hidden="true">' .
+//					'<a href="https://projectredcap.org" tabindex="-1" target="_blank">' . $copyrightText .
+//				'</div>';
 		print	'</div>';
 
 		// Messenger panel for non-project pages

@@ -431,69 +431,6 @@ if (!empty($user_rights))
  * APPLICATIONS MENU
  * Show function links based on rights level (Don't allow designated Double Data Entry people to see pages displaying other user's data.)
  */
-$repeatingFormsEvents = $Proj->getRepeatingFormsEvents();
-$hasRepeatingForms = $Proj->hasRepeatingForms();
-$hasRepeatingEvents = $Proj->hasRepeatingEvents();
-$hasRepeatingFormsOrEvents = ($hasRepeatingForms || $hasRepeatingEvents);
-
-$imgCollapsed = $appsMenuCollapsed ? "toggle-expand.png" : "toggle-collapse.png";
-$statusIconTitle = "<div style='float:left'>Status Icons</div>
-                        <div class='opacity65 projMenuToggle' id='$menu_id'>"
-    . RCView::a(array('href'=>'javascript:;'),
-        RCView::img(array('src'=>$imgCollapsed, 'class'=>($isIE ? 'opacity65' : '')))
-    ) . "
-				   </div>";
-$statusIcon = RCView::div(array('id'=>'rsd_legend', 'class'=>'chklist', 'style'=>(is_numeric($rd_id) ? 'display:none;' : '').'background-color:#eee;border:1px solid #ccc;'),
-    RCView::table(array('id'=>'status-icon-legend'),
-        RCView::tr('').
-        RCView::td(array('class'=>'nowrap', 'style'=>''),
-            RCView::img(array('src'=>'circle_gray.png')) . $lang['global_92'] . " " . $lang['data_entry_205'] .
-            RCView::a(array('href'=>'javascript:;', 'class'=>'help', 'title'=>$lang['global_58'], 'onclick'=>"simpleDialog('".js_escape($lang['data_entry_232'])."','".js_escape($lang['global_92'] . " " . $lang['data_entry_205'])."');"), '?')
-        )
-    ) .
-    RCView::tr('',
-        RCView::td(array('class'=>'nowrap', 'style'=>'padding-right:5px;'),
-            RCView::img(array('src'=>'circle_red.png')) . $lang['global_92']
-        ) .
-        RCView::tr('',
-            RCView::td(array('class'=>'nowrap', 'style'=>'padding-right:5px;'),
-                RCView::img(array('src'=>'circle_yellow.png')) . $lang['global_93']
-            ) .
-            RCView::td(array('class'=>'nowrap', 'style'=>''),
-                ($surveys_enabled
-                    ? RCView::img(array('src'=>'circle_orange_tick.png')) . $lang['global_95']
-                    : (!$hasRepeatingFormsOrEvents ? "" :
-                        (RCView::img(array('src'=>'circle_green_stack.png')) . RCView::img(array('src'=>'circle_yellow_stack.png', 'style'=>'position:relative;left:-6px;')) .
-                            RCView::img(array('src'=>'circle_red_stack.png', 'style'=>'position:relative;left:-12px;')) .
-                            RCView::span(array('style'=>'position:relative;left:-12px;'), $lang['data_entry_282'])))
-                )
-            )
-        ) .
-        RCView::tr('',
-            RCView::td(array('class'=>'nowrap', 'style'=>'padding-right:5px;'),
-                RCView::img(array('src'=>'circle_green.png')) . $lang['survey_28']
-            ) .
-            RCView::td(array('class'=>'nowrap', 'style'=>''),
-                ($surveys_enabled
-                    ? RCView::img(array('src'=>'circle_green_tick.png')) . $lang['global_94']
-                    : (!$hasRepeatingFormsOrEvents ? "" : RCView::img(array('src'=>'circle_blue_stack.png')) . $lang['data_entry_281'])
-                )
-            )
-        ) .
-        ( !($hasRepeatingFormsOrEvents && $surveys_enabled) ? "" :
-            RCView::tr('',
-                RCView::td(array('class'=>'nowrap', 'style'=>'padding-right:5px;'),
-                    RCView::img(array('src'=>'circle_blue_stack.png')) . $lang['data_entry_281']
-                ) .
-                RCView::td(array('class'=>'nowrap', 'style'=>''),
-                    RCView::img(array('src'=>'circle_green_stack.png')) . RCView::img(array('src'=>'circle_yellow_stack.png', 'style'=>'position:relative;left:-6px;')) .
-                    RCView::img(array('src'=>'circle_red_stack.png', 'style'=>'position:relative;left:-12px;')) .
-                    RCView::span(array('style'=>'position:relative;left:-12px;'), $lang['data_entry_282'])
-                )
-            )
-        )
-    )
-);
 
 $menu_id = 'projMenuApplications';
 $appsMenuCollapsed = UIState::getMenuCollapseState($project_id, $menu_id);
@@ -600,6 +537,70 @@ if (UserRights::displayExternalModulesMenuLink())
 }
 $appsMenu .= "</div>";
 
+// Status Icons
+//$repeatingFormsEvents = $Proj->getRepeatingFormsEvents();
+//$hasRepeatingForms = $Proj->hasRepeatingForms();
+//$hasRepeatingEvents = $Proj->hasRepeatingEvents();
+//$hasRepeatingFormsOrEvents = ($hasRepeatingForms || $hasRepeatingEvents);
+//
+//$imgCollapsed = $appsMenuCollapsed ? "toggle-expand.png" : "toggle-collapse.png";
+//$statusIconTitle = "<div style='float:left'>Status Icons</div>
+//                        <div class='opacity65 projMenuToggle' id='$menu_id'>"
+//    . RCView::a(array('href'=>'javascript:;'),
+//        RCView::img(array('src'=>$imgCollapsed, 'class'=>($isIE ? 'opacity65' : '')))
+//    ) . "
+//				   </div>";
+//$statusIcon = RCView::div(array('id'=>'rsd_legend', 'class'=>'chklist', 'style'=>(is_numeric($rd_id) ? 'display:none;' : '').'background-color:#eee;border:1px solid #ccc;'),
+//    RCView::table(array('id'=>'status-icon-legend'),
+//        RCView::tr('').
+//        RCView::td(array('class'=>'nowrap', 'style'=>''),
+//            RCView::img(array('src'=>'circle_gray.png')) . $lang['global_92'] . " " . $lang['data_entry_205'] .
+//            RCView::a(array('href'=>'javascript:;', 'class'=>'help', 'title'=>$lang['global_58'], 'onclick'=>"simpleDialog('".js_escape($lang['data_entry_232'])."','".js_escape($lang['global_92'] . " " . $lang['data_entry_205'])."');"), '?')
+//        )
+//    ) .
+//    RCView::tr('',
+//        RCView::td(array('class'=>'nowrap', 'style'=>'padding-right:5px;'),
+//            RCView::img(array('src'=>'circle_red.png')) . $lang['global_92']
+//        ) .
+//        RCView::tr('',
+//            RCView::td(array('class'=>'nowrap', 'style'=>'padding-right:5px;'),
+//                RCView::img(array('src'=>'circle_yellow.png')) . $lang['global_93']
+//            ) .
+//            RCView::td(array('class'=>'nowrap', 'style'=>''),
+//                ($surveys_enabled
+//                    ? RCView::img(array('src'=>'circle_orange_tick.png')) . $lang['global_95']
+//                    : (!$hasRepeatingFormsOrEvents ? "" :
+//                        (RCView::img(array('src'=>'circle_green_stack.png')) . RCView::img(array('src'=>'circle_yellow_stack.png', 'style'=>'position:relative;left:-6px;')) .
+//                            RCView::img(array('src'=>'circle_red_stack.png', 'style'=>'position:relative;left:-12px;')) .
+//                            RCView::span(array('style'=>'position:relative;left:-12px;'), $lang['data_entry_282'])))
+//                )
+//            )
+//        ) .
+//        RCView::tr('',
+//            RCView::td(array('class'=>'nowrap', 'style'=>'padding-right:5px;'),
+//                RCView::img(array('src'=>'circle_green.png')) . $lang['survey_28']
+//            ) .
+//            RCView::td(array('class'=>'nowrap', 'style'=>''),
+//                ($surveys_enabled
+//                    ? RCView::img(array('src'=>'circle_green_tick.png')) . $lang['global_94']
+//                    : (!$hasRepeatingFormsOrEvents ? "" : RCView::img(array('src'=>'circle_blue_stack.png')) . $lang['data_entry_281'])
+//                )
+//            )
+//        ) .
+//        ( !($hasRepeatingFormsOrEvents && $surveys_enabled) ? "" :
+//            RCView::tr('',
+//                RCView::td(array('class'=>'nowrap', 'style'=>'padding-right:5px;'),
+//                    RCView::img(array('src'=>'circle_blue_stack.png')) . $lang['data_entry_281']
+//                ) .
+//                RCView::td(array('class'=>'nowrap', 'style'=>''),
+//                    RCView::img(array('src'=>'circle_green_stack.png')) . RCView::img(array('src'=>'circle_yellow_stack.png', 'style'=>'position:relative;left:-6px;')) .
+//                    RCView::img(array('src'=>'circle_red_stack.png', 'style'=>'position:relative;left:-12px;')) .
+//                    RCView::span(array('style'=>'position:relative;left:-12px;'), $lang['data_entry_282'])
+//                )
+//            )
+//        )
+//    )
+//);
 
 
 
@@ -627,7 +628,8 @@ $helpMenuTitle =   "<div style='float:left;'>
 						RCView::img(array('src'=>$imgCollapsed, 'class'=>($isIE ? 'opacity65' : '')))
 					  ) . "
 				   </div>";
-$contactAdminBtnText = ($Proj->project['project_contact_name'] == '') ? $lang['bottom_76'] : $lang['index_09'] . " " . strip_tags($Proj->project['project_contact_name']);
+//$contactAdminBtnText = ($Proj->project['project_contact_name'] == '') ? $lang['bottom_76'] : $lang['index_09'] . " " . strip_tags($Proj->project['project_contact_name']);
+$contactAdminBtnText = $lang['index_09'];
 $helpMenu = "<div class='menubox' style='font-size:11px;color:#444;'>
 
 				<!-- Help & FAQ -->

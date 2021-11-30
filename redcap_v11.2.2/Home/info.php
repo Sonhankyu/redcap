@@ -96,53 +96,53 @@ print  "<div class='col-11 col-md-6'>";
 //                "				<p>
 //					<b>{$lang['info_50']}</b> - {$lang['info_28']}, {$lang['info_29']}, {$lang['info_30']}
 //				</p>";
-if ($pdf_econsent_system_enabled) {
-	print '		<p>
-					<b>' . $lang['info_45'] . '</b> - ' . $lang['info_46'] . '
-				</p>';
-}
-print '			<p>
-                <b>'.$lang['info_51'].'</b> - '.$lang['info_52'].'
-            </p>';
-// Display info about Mobile App, if enabled
-if ($api_enabled && isset($mobile_app_enabled) && $mobile_app_enabled) {
-    print "	<p>
-                <b>{$lang['global_118']}</b> - {$lang['info_43']}
-            </p>";
-}
-// Data Resolution module
-print "		<p>
-                <b>{$lang['info_53']}</b> - {$lang['info_54']}
-            </p>
-            <p>
-                <b>{$lang['info_55']}</b> - {$lang['info_56']}
-            </p>";
-print           '<p>
-					<b>'.$lang['info_19'].'</b> - '.$lang['info_57'].'
-				</p>';
-
-// Display ability to upload files via Send-It, if enabled
-if ($sendit_enabled != 0) {
-	print "		<p>
-					<b>{$lang['info_58']}</b> - {$lang['info_59']}
-				</p>";
-}
-print "		<p>
-				<b>{$lang['info_60']}</b> - {$lang['info_61']}
-			</p>";
-// Display info about API, if enabled
-if ($api_enabled || $fhir_ddp_enabled || $fhir_data_mart_create_project) {
-	print "<p>
-            <b>{$lang['info_62']}</b> - {$lang['info_63']}";
-	if ($api_enabled) {
-		print $lang['setup_77'];
-	}
-	if ($fhir_ddp_enabled || $fhir_data_mart_create_project) {
-		if ($api_enabled) print $lang['comma'] . " ";
-		print $lang['ws_262'];
-	}
-	print "{$lang['info_64']}</p>";
-}
+//if ($pdf_econsent_system_enabled) {
+//	print '		<p>
+//					<b>' . $lang['info_45'] . '</b> - ' . $lang['info_46'] . '
+//				</p>';
+//}
+//print '			<p>
+//                <b>'.$lang['info_51'].'</b> - '.$lang['info_52'].'
+//            </p>';
+//// Display info about Mobile App, if enabled
+//if ($api_enabled && isset($mobile_app_enabled) && $mobile_app_enabled) {
+//    print "	<p>
+//                <b>{$lang['global_118']}</b> - {$lang['info_43']}
+//            </p>";
+//}
+//// Data Resolution module
+//print "		<p>
+//                <b>{$lang['info_53']}</b> - {$lang['info_54']}
+//            </p>
+//            <p>
+//                <b>{$lang['info_55']}</b> - {$lang['info_56']}
+//            </p>";
+//print           '<p>
+//					<b>'.$lang['info_19'].'</b> - '.$lang['info_57'].'
+//				</p>';
+//
+//// Display ability to upload files via Send-It, if enabled
+//if ($sendit_enabled != 0) {
+//	print "		<p>
+//					<b>{$lang['info_58']}</b> - {$lang['info_59']}
+//				</p>";
+//}
+//print "		<p>
+//				<b>{$lang['info_60']}</b> - {$lang['info_61']}
+//			</p>";
+//// Display info about API, if enabled
+//if ($api_enabled || $fhir_ddp_enabled || $fhir_data_mart_create_project) {
+//	print "<p>
+//            <b>{$lang['info_62']}</b> - {$lang['info_63']}";
+//	if ($api_enabled) {
+//		print $lang['setup_77'];
+//	}
+//	if ($fhir_ddp_enabled || $fhir_data_mart_create_project) {
+//		if ($api_enabled) print $lang['comma'] . " ";
+//		print $lang['ws_262'];
+//	}
+//	print "{$lang['info_64']}</p>";
+//}
 
 print "
 		</div>";

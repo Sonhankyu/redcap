@@ -699,13 +699,13 @@ function loginFunction()
 	}
 
 	// Login instructions (default)
-	print  "<p style='font-size:13px;'>
-				{$lang['config_functions_67']}
-				<a style='font-size:13px;text-decoration:underline;' href=\"".
-				(trim($homepage_contact_url) == '' ? "mailto:$homepage_contact_email" : trim($homepage_contact_url)) .
-				"\">$homepage_contact</a>{$lang['period']}
-			</p>
-			<br>";
+//	print  "<p style='font-size:13px;'>
+//				{$lang['config_functions_67']}
+//				<a style='font-size:13px;text-decoration:underline;' href=\"".
+//				(trim($homepage_contact_url) == '' ? "mailto:$homepage_contact_email" : trim($homepage_contact_url)) .
+//				"\">$homepage_contact</a>{$lang['period']}
+//			</p>
+//			<br>";
 
 	// Sanitize action URL for login form
 	$loginFormActionUrl = js_escape(str_replace('`', '', $_SERVER['REQUEST_URI']));

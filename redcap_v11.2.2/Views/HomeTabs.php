@@ -23,7 +23,9 @@ loadJS('Libraries/velocity-ui-min.js');
 ?>
 
 <nav class="navbar navbar-expand-md navbar-light fixed-top" style="background-color:#f8f8f8;border-bottom:1px solid #e7e7e7;padding:0 10px 0 0;" role="navigation">
-	<a class="navbar-brand" style="padding:8px 0px 5px 10px;" href="<?php print APP_PATH_WEBROOT_PARENT ?>"><img alt="REDCap" style="width:120px;height:36px;" src="<?php echo APP_PATH_IMAGES ?>redcap-logo-medium.png"></a>
+<!--    Home 탭 제거 및 로고 클릭 시 이동 링크 변경 => My Projects 로 이동    -->
+<!--	<a class="navbar-brand" style="padding:8px 0px 5px 10px;" href="--><?php //print APP_PATH_WEBROOT_PARENT ?><!--"><img alt="REDCap" style="width:120px;height:36px;" src="--><?php //echo APP_PATH_IMAGES ?><!--redcap-logo-medium.png"></a>-->
+	<a class="navbar-brand" style="padding:8px 0px 5px 10px;" href="<?php print APP_PATH_WEBROOT_PARENT ?>index.php?action=myprojects"><img alt="REDCap" style="width:120px;height:36px;" src="<?php echo APP_PATH_IMAGES ?>redcap-logo-medium.png"></a>
 	<?php print $ccBrand ?>
 	<button type="button" class="navbar-toggler collapsed" data-toggle="collapse" <?php print $navCollapse ?> aria-expanded="false">
 		<span class="navbar-toggler-icon"></span>
@@ -31,7 +33,7 @@ loadJS('Libraries/velocity-ui-min.js');
 
     <div class="collapse navbar-collapse" id="redcap-home-navbar-collapse">
       <ul class="nav navbar-nav">
-        <li id="nav-tab-home" class="nav-item<?php print $tabHomeActive ?>"><a class="nav-link" style="color:#333;padding:15px 8px;" href="<?php print APP_PATH_WEBROOT_PARENT ?>index.php"><?php print $lang['home_21'] ?></a></li>
+<!--        <li id="nav-tab-home" class="nav-item--><?php //print $tabHomeActive ?><!--"><a class="nav-link" style="color:#333;padding:15px 8px;" href="--><?php //print APP_PATH_WEBROOT_PARENT ?><!--index.php">--><?php //print $lang['home_21'] ?><!--</a></li>-->
         <li class="nav-item<?php print $tabMyProjectsActive ?>"><a class="nav-link" style="color:#000;padding:15px 8px;" href="<?php print APP_PATH_WEBROOT_PARENT ?>index.php?action=myprojects"><i class="far fa-list-alt"></i> <?php print $lang['home_22'] ?></a></li>
         <?php if (isset($GLOBALS['allow_create_db']) && $GLOBALS['allow_create_db']) { ?><li class="nav-item<?php print $tabNewProjectActive ?>"><a class="nav-link" style="color:#008000;padding:15px 8px;" href="<?php print APP_PATH_WEBROOT_PARENT ?>index.php?action=create"><i class="fas fa-plus"></i> <?php print $lang['home_61'] ?></a></li><?php } ?>
         <li id="nav-tab-help" class="nav-item<?php print $tabHelpActive ?>"><a class="nav-link" style="color:#3E72A8;padding:15px 8px;" href="<?php print APP_PATH_WEBROOT_PARENT ?>index.php?action=help"><i class="fas fa-question-circle"></i> <?php print $lang['bottom_27'] ?></a></li>
