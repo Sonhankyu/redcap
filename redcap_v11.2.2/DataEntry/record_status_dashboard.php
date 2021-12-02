@@ -564,8 +564,13 @@ $arm_id = $Proj->getArmIdFromArmNum($arm);
 // ADD ROWS: Get form status values for all records/events/forms and loop through them
 $prev_form = $prev_event = null;
 $rowclass = "even";
-//print_array($formStatusValues['test02']['65']['crf'][1]);
-//print_array($recordNamesThisPage);
+
+$sql_doubleData = "SELECT double_data FROM redcap_user_rights WHERE project_id = {$project_id} AND double_data > '0'";
+$q = db_query($sql_doubleData);
+while($result = db_fetch_assoc($q)){
+    $cntUser[] = $result['double_data'];
+}
+
 foreach ($formStatusValues as $this_record=>$rec_attr)
 {
     if($user_rights['role_id'] > 0 && strpos($this_record, "--")){
@@ -629,7 +634,8 @@ foreach ($formStatusValues as $this_record=>$rec_attr)
 			$status_value_count = strlen($status_concat);
 			$form_has_mixed_statuses = false;
 			$form_has_multiple_instances = ($status_count > 1);
-//            print_array($rec_attr[$attr['event_id']]['analysis']);
+            $complete_analysis_cnt = 0;
+
 			if ($form_has_multiple_instances) {
 				// Determine if all statuses are same or mixed status values
 				$all0s = (str_replace('0', '', $status_concat) == '');
@@ -647,6 +653,22 @@ foreach ($formStatusValues as $this_record=>$rec_attr)
 			} else {
 				$this_status_array = array_pop($this_status_array);
 			}
+
+            //  분석자 전부 분석 완료 시 (Complete - 초록 아이콘) 조정자 폼 (메인 Subject) 상태 아이콘 대기 상태로 변경 (노랑 아이콘)
+            if(!strpos($this_record, "--") && $attr['form_name'] == 'analysis' && $rec_attr[$attr['event_id']]['analysis'] == null){
+
+                foreach ($cntUser as $entryNum){
+                    if($formStatusValues[$this_record . "--" . $entryNum][$attr['event_id']]['analysis'][1] == '2'){
+                        $complete_analysis_cnt++;
+                    }else{
+                        break;
+                    }
+                }
+                if($complete_analysis_cnt == count($cntUser)){
+                    $this_status_array = '1';
+                }
+            }
+
 			// Mixed status icon
 			if ($form_has_mixed_statuses) {
 				$img = 'circle_blue_stack.png';
