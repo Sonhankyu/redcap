@@ -655,7 +655,9 @@ foreach ($formStatusValues as $this_record=>$rec_attr)
 			}
 
             //  분석자 전부 분석 완료 시 (Complete - 초록 아이콘) 조정자 폼 (메인 Subject) 상태 아이콘 대기 상태로 변경 (노랑 아이콘)
-            if(!strpos($this_record, "--") && end($rec_attr[$attr['event_id']]) == null){
+//            end($rec_attr[$attr['event_id']]);
+//            $key = key($rec_attr[$attr['event_id']]);
+            if(!strpos($this_record, "--") && array_key_last($rec_attr[$attr['event_id']]) == $attr['form_name'] && end($rec_attr[$attr['event_id']]) == null){
 
                 foreach ($cntUser as $entryNum){
                     if(end($formStatusValues[$this_record . "--" . $entryNum][$attr['event_id']])[1] == '2'){
