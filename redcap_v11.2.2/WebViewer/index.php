@@ -27,9 +27,9 @@
 $connect = mysqli_connect(
     '127.0.0.1',
     'root',
-    '',
+    'qwer1234',
     'redcap',
-    '3307'
+    '3306'
 );
 
 if(mysqli_connect_errno()) {
