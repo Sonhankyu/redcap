@@ -5,44 +5,6 @@ require_once dirname(dirname(__FILE__)) . '/Config/init_project.php';
 
 System::increaseMemory(2048);
 
-
-// eCRF 페이지 URL 파라미터 받아옴
-$pid = $_GET['pid'];
-$subj_id = $_GET['id'];
-$evt_id = $_GET['event_id'];
-$instance_no = $_GET['instance'];
-$page = $_GET['page'];
-
-$sql = "SELECT series.series_iuid, series.series_desc
-        FROM pacsdb.series AS series 
-        INNER JOIN asan_pacs redcap 
-        INNER JOIN asan_pacs_series rseries ON redcap.idx = rseries.asan_pacs_idx AND series.series_iuid = rseries.series_iuid
-        WHERE redcap.project_id = '{$pid}' AND redcap.subject_id = '{$subj_id}' AND redcap.event_id = '{$evt_id}' AND redcap.instance = '{$instance_no}'";
-
-$result = db_query($sql);
-while ($row = db_fetch_array($result)) {
-    $seriesDesc_arr[] = $row['series_desc'];
-    $seriesUID_arr[] = $row['series_iuid'];
-}
-
-// 이미지 리스트 테이블
-for($i = 1; $i<=count($seriesUID_arr); $i++) {
-    $series_arr[] = RCView::div(array(),
-        RCView::label(array('for'=>"box_$i"),
-            RCView::checkbox(array('id'=>"box_$i",'name'=>'ckbox','style'=>'position: relative; top: 2px;', 'value'=>$seriesUID_arr[$i-1])) . $seriesDesc_arr[$i-1]
-        )
-    );
-    $seriesList = implode("", $series_arr);
-}
-
-// Visit 이름 가져오기
-$visitName = $Proj->eventInfo[$_GET['event_id']]['name_ext'];
-
-
-
-
-
-
 // Calculate class
 $cp = new Calculate();
 // BranchingLogic class
@@ -525,25 +487,6 @@ $pdfDownloadSurveyFormText2 = ($surveys_enabled) ? $lang['data_entry_136'] : $la
 $end_of_survey_pdf_download = (isset($Proj->forms[$_GET['page']]['survey_id']) && $Proj->surveys[$Proj->forms[$_GET['page']]['survey_id']]['end_of_survey_pdf_download'] == '1');
 // Get custom record label/secondary pk for this record
 $extra_record_labels = Records::getCustomRecordLabelsSecondaryFieldAllRecords(addDDEending($_GET['id']), true, getArm());
-
-//  Analysist Form Link
-$allSubjectList = array_values(Records::getRecordList(PROJECT_ID));
-$sql = "SELECT double_data FROM redcap_user_rights WHERE project_id = $project_id AND double_data > '0' ORDER BY double_data";
-$q = db_query($sql);
-while ($result = db_fetch_assoc($q)){
-    $tmp[] = $result['double_data'];
-}
-
-if(ADMIN_RIGHTS || $user_rights['role_id'] > 0){
-    foreach ($tmp as $analyst_user) {
-        if(in_array("$subj_id--$analyst_user", $allSubjectList)){
-            $analysist_Link = APP_PATH_WEBROOT."DataEntry/index.php?pid=$pid&id=$subj_id--$analyst_user&event_id=$evt_id&page=$page";
-            $button_arr[] = RCView::button(array('id'=>'viewAnalysist','class'=>'jqbuttonmed','onclick'=>'window.open("'.$analysist_Link.'")'), "Analyst #$analyst_user");
-        }
-    }
-    $analysist_button = implode("", $button_arr);
-}
-
 // Set data entry form header text
 print	RCView::div(array('id'=>'dataEntryTopOptions'),
             // Display logo, project title, and record name (PRINTERS ONLY)
@@ -556,235 +499,98 @@ print	RCView::div(array('id'=>'dataEntryTopOptions'),
 				    RCView::div(array('class'=>'font-weight-bold'), strip_tags($Proj->table_pk_label)." ".$_GET['id'] . strip_tags($extra_record_labels == '' ? '' : " $extra_record_labels"))
                 )
             ) .
-//			RCView::div(array('id'=>'dataEntryTopOptionsButtons', 'class'=>'d-print-none'),
-//				// "Actions:" text
-//				RCView::span(array('style'=>'color:#777;margin-right:6px;'), $lang['edit_project_29']) .
+			RCView::div(array('id'=>'dataEntryTopOptionsButtons', 'class'=>'d-print-none'),
+				// "Actions:" text
+				RCView::span(array('style'=>'color:#777;margin-right:6px;'), $lang['edit_project_29']) .
 				// Modify Instrument button (if displayed)
-//				$modifyInstBtn .
-
-                // WebViewer Button
-                // ?pid=$project_id&page={$_GET['page']}'; <- pid, event_id 에 해당되는 영상 가져오기위해 필요
-                // 'onclick'=>"window.location.href=app_path_webroot+'Design/online_designer.php?pid=$project_id&page={$_GET['page']}';"
-
-				// PDF button - 사용 안함
-//				RCView::button(array('id'=>'pdfExportDropdownTrigger', 'onclick'=>"showBtnDropdownList(this,event,'pdfExportDropdownDiv');", 'class'=>'jqbuttonmed'),
-//					RCView::img(array('src'=>'pdf.gif', 'style'=>'vertical-align:middle;position:relative;top:-1px;')) .
-//					RCView::span(array('style'=>'vertical-align:middle;color:#800000;'), $lang['data_export_tool_158']) .
-//					RCView::img(array('src'=>'arrow_state_grey_expanded.png', 'style'=>'margin-left:2px;vertical-align:middle;position:relative;top:-1px;'))
-//				) .
+				$modifyInstBtn .
+				// PDF button
+				RCView::button(array('id'=>'pdfExportDropdownTrigger', 'onclick'=>"showBtnDropdownList(this,event,'pdfExportDropdownDiv');", 'class'=>'jqbuttonmed'),
+					RCView::img(array('src'=>'pdf.gif', 'style'=>'vertical-align:middle;position:relative;top:-1px;')) .
+					RCView::span(array('style'=>'vertical-align:middle;color:#800000;'), $lang['data_export_tool_158']) .
+					RCView::img(array('src'=>'arrow_state_grey_expanded.png', 'style'=>'margin-left:2px;vertical-align:middle;position:relative;top:-1px;'))
+				) .
 				// Share Instrument button (if displayed)
-//				$shareInstBtn
-
-				// PDF button/drop-down options (initially hidden) - 사용 안함
-//				RCView::div(array('id'=>'pdfExportDropdownDiv', 'style'=>'display:none;position:absolute;z-index:1000;'),
-//					RCView::ul(array('id'=>'pdfExportDropdown'),
-//						RCView::li(array(),
-//							RCView::a(array('href'=>'javascript:;', 'style'=>'display:block;', 'onclick'=>"window.location.href = app_path_webroot+'index.php?route=PdfController:index&pid='+pid+'&page={$_GET['page']}';"),
-//								RCView::img(array('src'=>'pdf.gif')) .
-//								"$pdfDownloadSurveyFormText {$lang['data_entry_137']}"
-//							)
-//						) .
-//						(!(isset($_GET['id']) && $hidden_edit && $user_rights['data_export_tool'] > 0) ? '' :
-//							RCView::li(array(),
-//								RCView::a(array('href'=>'javascript:;', 'style'=>'display:block;', 'onclick'=>"window.location.href = app_path_webroot+'index.php?route=PdfController:index&pid='+pid+'&page={$_GET['page']}&id={$_GET['id']}{$entry_num}&event_id={$_GET['event_id']}'+(getParameterByName('instance')==''?'':'&instance='+getParameterByName('instance'));"),
-//									RCView::img(array('src'=>'pdf.gif')) .
-//									"$pdfDownloadSurveyFormText {$lang['data_entry_134']}"
-//								)
-//							) .
-//                            RCView::li(array(),
-//								RCView::a(array('href'=>'javascript:;', 'style'=>'display:block;', 'onclick'=>"$('.expandLink').click();window.print();"),
-//									RCView::img(array('src'=>'pdf.gif')) .
-//									"$pdfDownloadSurveyFormText {$lang['data_entry_134']} <span style='color:#A00000;margin-left:5px;'>{$lang['data_entry_498']}</span>"
-//								)
-//							) .
-//							RCView::li(array(),
-//								RCView::a(array('href'=>'javascript:;', 'style'=>'display:block;', 'onclick'=>"window.location.href = app_path_webroot+'index.php?route=PdfController:index&pid='+pid+'&page={$_GET['page']}&id={$_GET['id']}{$entry_num}&event_id={$_GET['event_id']}&compact=1'+(getParameterByName('instance')==''?'':'&instance='+getParameterByName('instance'));"),
-//									RCView::img(array('src'=>'pdf.gif')) .
-//									"$pdfDownloadSurveyFormText {$lang['data_entry_134']} {$lang['data_entry_425']}"
-//								)
-//							)
-//						) .
-//						(!(isset($_GET['id']) && $hidden_edit && $user_rights['data_export_tool'] > 0 && $end_of_survey_pdf_download) ? '' :
-//							RCView::li(array(),
-//								RCView::a(array('href'=>'javascript:;', 'style'=>'display:block;', 'onclick'=>"window.location.href = app_path_webroot+'index.php?route=PdfController:index&pid='+pid+'&s=&page={$_GET['page']}&id={$_GET['id']}{$entry_num}&event_id={$_GET['event_id']}'+(getParameterByName('instance')==''?'':'&instance='+getParameterByName('instance'));"),
-//									RCView::img(array('src'=>'pdf.gif')) .
-//									"$pdfDownloadSurveyFormText {$lang['data_entry_134']} {$lang['data_entry_397']}"
-//								)
-//							)
-//						) .
-//						((count($Proj->forms) <= 1) ? '' :
-//							RCView::li(array(),
-//								RCView::a(array('href'=>'javascript:;', 'style'=>'display:block;', 'onclick'=>"window.location.href = app_path_webroot+'index.php?route=PdfController:index&pid='+pid+'&all';"),
-//									RCView::img(array('src'=>'pdf.gif')) .
-//									"$pdfDownloadSurveyFormText2 {$lang['data_entry_137']}"
-//								)
-//							) .
-//							(!(isset($_GET['id']) && $hidden_edit && $user_rights['data_export_tool'] > 0) ? '' :
-//								RCView::li(array(),
-//									RCView::a(array('href'=>'javascript:;', 'style'=>'display:block;', 'onclick'=>"window.location.href = app_path_webroot+'index.php?route=PdfController:index&pid='+pid+'&id={$_GET['id']}{$entry_num}';"),
-//										RCView::img(array('src'=>'pdf.gif')) .
-//										"$pdfDownloadSurveyFormText2 {$lang['data_entry_134']}"
-//									)
-//								) .
-//								RCView::li(array(),
-//									RCView::a(array('href'=>'javascript:;', 'style'=>'display:block;', 'onclick'=>"window.location.href = app_path_webroot+'index.php?route=PdfController:index&pid='+pid+'&id={$_GET['id']}{$entry_num}&compact=1';"),
-//										RCView::img(array('src'=>'pdf.gif')) .
-//										"$pdfDownloadSurveyFormText2 {$lang['data_entry_134']} {$lang['data_entry_425']}"
-//									)
-//								)
-//							)
-//						)
-//					)
-//				)
-                // 비디오 링크 사용 안함
-//				RCView::span(array('class'=>'nowrap', 'style'=>'margin-left:50px;line-height:24px;'),
-//					// VIDEO link
-//                    '<i class="fas fa-film"></i> ' .
-//					RCView::a(array('href'=>'javascript:;', 'style'=>'font-weight:normal;text-decoration:underline;', 'onclick'=>"window.open('".CONSORTIUM_WEBSITE."videoplayer.php?video=data_entry_overview_02.mp4&referer=".SERVER_NAME."&title=Overview of Basic Data Entry','myWin','width=1050, height=800, toolbar=0, menubar=0, location=0, status=0, scrollbars=1, resizable=1');"),
-//						"{$lang['global_80']} {$lang['data_entry_200']}"
-//					)
-//				)
-//            ).
-            RCView::div(array('id'=>'actionButton', 'class'=>'d-print-none'),
-                // "Actions:" text
-                RCView::span(array('style'=>'color:#777;margin-right:6px;'), $lang['edit_project_29']) .
-                RCView::button(array('onclick'=>"openViewer();", 'class'=>'jqbuttonmed'),
-                    RCView::span(array('style'=>'vertical-align:middle;color:#444;'), 'WebViewer')
-                )
-            ).
-
-            // Image List Table
-            RCView::div(array('id'=>'dcmImageList'),
-                RCView::div(array('id'=>'list-title', 'style'=>'margin-top:20px; color:#800000;font-size:16px;font-weight:bold;'),"Image") .
-                RCView::table(array('class'=>'imageTable labelrc col-12','style'=>'margin-top:10px;'),
-                    RCView::thead(array('style'=>''),
-                        RCView::tr(array(),
-                            RCView::td(array('style'=>'width: 130px;'), "Visit") .
-                            RCView::td(array('style'=>'width: 70px;'), "-") .
-                            RCView::td(array(), "Series List")
-                        )
-                    ) .
-                    RCView::tbody(array(),
-                        RCView::tr(array(),
-                            RCView::td(array(),
-                                RCView::div(array(),
-                                    RCView::label(array('for'=>"visitName"),
-                                        RCView::checkbox(array('id'=>"visitName",'onclick'=>"checkAllList(this)",'name'=>'visitName','style'=>'')) . $visitName
-                                    )
-                                )
-                            ) .
-                            RCView::td(array('style'=>'text-align: center;'),
-                                RCView::button(array('id'=>'hideImage','onclick'=>'hideBtn()','value'=>'hide','style'=>'background: url("'.APP_PATH_IMAGES.'btn_hide.png")')) .
-                                RCView::button(array('id'=>'showImage','onclick'=>'showBtn()','value'=>'show','style'=>'background: url("'.APP_PATH_IMAGES.'btn_show.png")'))
-
-                            ) .
-                            RCView::td(array('style'=>'font-weight: normal;'),
-                                RCView::div(array('id'=>'seriesList'), $seriesList
-                                ) .
-                                RCView::div(array('id'=>'seriesCnt'), count($seriesUID_arr)
-                                )
-                            )
-                        )
-                    )
-                )
-            ) .
+				$shareInstBtn .
+				// PDF button/drop-down options (initially hidden)
+				RCView::div(array('id'=>'pdfExportDropdownDiv', 'style'=>'display:none;position:absolute;z-index:1000;'),
+					RCView::ul(array('id'=>'pdfExportDropdown'),
+						RCView::li(array(),
+							RCView::a(array('href'=>'javascript:;', 'style'=>'display:block;', 'onclick'=>"window.location.href = app_path_webroot+'index.php?route=PdfController:index&pid='+pid+'&page={$_GET['page']}';"),
+								RCView::img(array('src'=>'pdf.gif')) .
+								"$pdfDownloadSurveyFormText {$lang['data_entry_137']}"
+							)
+						) .
+						(!(isset($_GET['id']) && $hidden_edit && $user_rights['data_export_tool'] > 0) ? '' :
+							RCView::li(array(),
+								RCView::a(array('href'=>'javascript:;', 'style'=>'display:block;', 'onclick'=>"window.location.href = app_path_webroot+'index.php?route=PdfController:index&pid='+pid+'&page={$_GET['page']}&id={$_GET['id']}{$entry_num}&event_id={$_GET['event_id']}'+(getParameterByName('instance')==''?'':'&instance='+getParameterByName('instance'));"),
+									RCView::img(array('src'=>'pdf.gif')) .
+									"$pdfDownloadSurveyFormText {$lang['data_entry_134']}"
+								)
+							) .
+                            RCView::li(array(),
+								RCView::a(array('href'=>'javascript:;', 'style'=>'display:block;', 'onclick'=>"$('.expandLink').click();window.print();"),
+									RCView::img(array('src'=>'pdf.gif')) .
+									"$pdfDownloadSurveyFormText {$lang['data_entry_134']} <span style='color:#A00000;margin-left:5px;'>{$lang['data_entry_498']}</span>"
+								)
+							) .
+							RCView::li(array(),
+								RCView::a(array('href'=>'javascript:;', 'style'=>'display:block;', 'onclick'=>"window.location.href = app_path_webroot+'index.php?route=PdfController:index&pid='+pid+'&page={$_GET['page']}&id={$_GET['id']}{$entry_num}&event_id={$_GET['event_id']}&compact=1'+(getParameterByName('instance')==''?'':'&instance='+getParameterByName('instance'));"),
+									RCView::img(array('src'=>'pdf.gif')) .
+									"$pdfDownloadSurveyFormText {$lang['data_entry_134']} {$lang['data_entry_425']}"
+								)
+							)
+						) .
+						(!(isset($_GET['id']) && $hidden_edit && $user_rights['data_export_tool'] > 0 && $end_of_survey_pdf_download) ? '' :
+							RCView::li(array(),
+								RCView::a(array('href'=>'javascript:;', 'style'=>'display:block;', 'onclick'=>"window.location.href = app_path_webroot+'index.php?route=PdfController:index&pid='+pid+'&s=&page={$_GET['page']}&id={$_GET['id']}{$entry_num}&event_id={$_GET['event_id']}'+(getParameterByName('instance')==''?'':'&instance='+getParameterByName('instance'));"),
+									RCView::img(array('src'=>'pdf.gif')) .
+									"$pdfDownloadSurveyFormText {$lang['data_entry_134']} {$lang['data_entry_397']}"
+								)
+							)
+						) .
+						((count($Proj->forms) <= 1) ? '' :
+							RCView::li(array(),
+								RCView::a(array('href'=>'javascript:;', 'style'=>'display:block;', 'onclick'=>"window.location.href = app_path_webroot+'index.php?route=PdfController:index&pid='+pid+'&all';"),
+									RCView::img(array('src'=>'pdf.gif')) .
+									"$pdfDownloadSurveyFormText2 {$lang['data_entry_137']}"
+								)
+							) .
+							(!(isset($_GET['id']) && $hidden_edit && $user_rights['data_export_tool'] > 0) ? '' :
+								RCView::li(array(),
+									RCView::a(array('href'=>'javascript:;', 'style'=>'display:block;', 'onclick'=>"window.location.href = app_path_webroot+'index.php?route=PdfController:index&pid='+pid+'&id={$_GET['id']}{$entry_num}';"),
+										RCView::img(array('src'=>'pdf.gif')) .
+										"$pdfDownloadSurveyFormText2 {$lang['data_entry_134']}"
+									)
+								) .								
+								RCView::li(array(),
+									RCView::a(array('href'=>'javascript:;', 'style'=>'display:block;', 'onclick'=>"window.location.href = app_path_webroot+'index.php?route=PdfController:index&pid='+pid+'&id={$_GET['id']}{$entry_num}&compact=1';"),
+										RCView::img(array('src'=>'pdf.gif')) .
+										"$pdfDownloadSurveyFormText2 {$lang['data_entry_134']} {$lang['data_entry_425']}"
+									)
+								)
+							)
+						)
+					)
+				) .
+				RCView::span(array('class'=>'nowrap', 'style'=>'margin-left:50px;line-height:24px;'),
+					// VIDEO link
+                    '<i class="fas fa-film"></i> ' .
+					RCView::a(array('href'=>'javascript:;', 'style'=>'font-weight:normal;text-decoration:underline;', 'onclick'=>"window.open('".CONSORTIUM_WEBSITE."videoplayer.php?video=data_entry_overview_02.mp4&referer=".SERVER_NAME."&title=Overview of Basic Data Entry','myWin','width=1050, height=800, toolbar=0, menubar=0, location=0, status=0, scrollbars=1, resizable=1');"),
+						"{$lang['global_80']} {$lang['data_entry_200']}"
+					)
+				)
+			) .
 			RCView::div(array('id'=>'form-title'),
 				"<img src='".APP_PATH_IMAGES."blog.png' class='d-print-none'>
 				".RCView::escape($Proj->forms[$_GET['page']]['menu'])." $formMenuAppend" .
 				// "Record was edited" message for Save&Stay btn
 				RCView::div(array('class'=>'d-print-none'), (isset($_GET['msg']) && $_GET['msg'] == 'edit' ? $context_msg_update : ''))
-			) .
-
-            RCView::div(array(),
-                RCView::p(array(),
-                    $analysist_button
-                )
-            ) .
-            RCView::br()
+			)
 		);
-
-//  $this_url = APP_PATH_WEBROOT."DataEntry/index.php?pid=$project_id&id=".urlencode($displayid)."&event_id={$row['event_id']}&page={$row['form_name']}"
-
-
 // Javascript
 ?>
-
-<!-- Image List CSS -->
-<style>
-    .imageTable td {
-        border: 1px solid #dddddd; !important;
-        padding: 7px;
-    }
-    .imageTable thead {
-        text-align: center;
-        font-size:15px;
-    }
-    .imageTable tbody {
-        vertical-align: top;
-    }
-    .imageTable input {
-        position: relative; top: 2px;
-    }
-    .imageTable button {
-        margin-top: 3px;
-        width: 43px;
-        height: 20px;
-        outline: 0;
-        border: 0;
-    }
-    .imageTable div {
-        margin-top: 3px;
-    }
-    #hideImage, #seriesList {
-        display: none;
-    }
-    label {
-        margin: auto;
-    }
-</style>
-
 <script type="text/javascript">
-    function openViewer(){
-        // alert("1");
-        var arr = [];
-        var checkedBox = document.getElementsByName("ckbox").length;
-        for (var i = 0; i<checkedBox; i++){
-            if(document.getElementsByName("ckbox")[i].checked === true) {
-                arr.push(document.getElementsByName("ckbox")[i].value);
-            }
-        }
-        window.open(app_path_webroot+'WebViewer/index.php?url='+arr);
-    }
-    function checkAllList(box) {
-        const checkboxes = document.getElementsByName('ckbox');
-        if(box.checked === true){
-            checkboxes.forEach((checkbox) => {
-                checkbox.checked = box.checked;
-            })
-        }else{
-            checkboxes.forEach((checkbox) => {
-                checkbox.checked = box.checked;
-            })
-        }
-    }
-
-    // function hideNshowBtn(){
-    //     $('#showImage').css({"background":"url('".APP_PATH_IMAGES."'btn_show.png)"});
-    // }
-    function hideBtn(){
-        $('#showImage').show();
-        $('#seriesCnt').show();
-        $('#hideImage').hide();
-        $('#seriesList').hide();
-    }
-    function showBtn(){
-        $('#hideImage').show();
-        $('#seriesList').show();
-        $('#showImage').hide();
-        $('#seriesCnt').hide();
-        //$('#showImage').css({"background":"url(. <?//=APP_PATH_IMAGES?>// . btn_show.png)"});
-    }
-
 $(function(){
 	// Initialize button drop-down(s) for top of form
 	$('#pdfExportDropdown, #SurveyActionDropDownUl, #repeatInstanceDropdownUl').menu();
@@ -1658,7 +1464,7 @@ elseif (isset($_GET['id']))
 		background:#f5f5f5;
 		border:0px;
 		border-bottom:1px solid #DDDDDD;
-		border-top:1px solid #DDDDDD;
+		border-top:0px solid #f5f5f5;
 	}
 	.header {
 		border-left:0;

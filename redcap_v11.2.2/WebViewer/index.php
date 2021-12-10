@@ -1,65 +1,31 @@
 <?php
-//$connect = mysqli_connect(
-//        '127.0.0.1',
-//        'pacs',
-//        'pacs',
-//        'pacsdb',
-//            '3306'
-//);
-//
-//if(mysqli_connect_errno()) {
-//    echo 'Connect Failed : ' . mysqli_connect_error();
-//}
-//
-//$sql = "SELECT pacsdb.files.filepath
-//        FROM pacsdb.files AS files
-//        INNER JOIN pacsdb.instance AS inst ON files.instance_fk = inst.pk
-//        INNER  JOIN pacsdb.series AS series ON inst.series_fk = series.pk
-//        WHERE series.series_iuid";
-//
-//$result = mysqli_query($connect, $sql);
-//
-//while ($row = mysqli_fetch_array($result)) {
-//    $url_arr[] = '"./files/' . $row[0] . '"';
-//}
-//$url = implode(", ", $url_arr);
-
 $connect = mysqli_connect(
-    '127.0.0.1',
-    'root',
-    '',
-    'redcap',
-    '3307'
+        '127.0.0.1',
+        'pacs',
+        'pacs',
+        'pacsdb',
+            '3306'
 );
 
 if(mysqli_connect_errno()) {
     echo 'Connect Failed : ' . mysqli_connect_error();
 }
-// series UID 파라미터 받아옴
-$url = explode(",", "'" . $_GET['url'] . "'");
-$seriesUID = implode("', '", $url);
 
 $sql = "SELECT pacsdb.files.filepath
         FROM pacsdb.files AS files
         INNER JOIN pacsdb.instance AS inst ON files.instance_fk = inst.pk
         INNER  JOIN pacsdb.series AS series ON inst.series_fk = series.pk
-        WHERE series.series_iuid in ({$seriesUID})";
+        WHERE series.series_iuid";
 
 $result = mysqli_query($connect, $sql);
 
 while ($row = mysqli_fetch_array($result)) {
     $url_arr[] = '"./files/' . $row[0] . '"';
 }
-
-if (!empty($url_arr)){
-    $url = implode(", ", $url_arr);
-}else{
-    echo "<script>alert('No image selected')</script>";
-    echo "<script>window.close()</script>";
-}
-
+$url = implode(", ", $url_arr);
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
