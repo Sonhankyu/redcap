@@ -264,27 +264,27 @@ if (!empty($user_rights))
 
 	## DATA STATUS GRID
 	$dataEntry .= "<div class='hang' style='position:relative;'><i class=\"fas fa-th\" style='text-indent: 0;'></i>&nbsp;&nbsp;<a href='".APP_PATH_WEBROOT."DataEntry/record_status_dashboard.php?pid=$project_id'>{$lang['global_91']}</a></div>";
-	if ($status < 1) {
-		$dataEntry .=  "<div class='menuboxsub' style='position:relative;'>- ".$lang['bottom_60']."</div>";
-	}
+//	if ($status < 1) {
+//		$dataEntry .=  "<div class='menuboxsub' style='position:relative;'>- ".$lang['bottom_60']."</div>";
+//	}
 
 	// If user is on grid page or data entry page and record is selected, make grid icon a link back to grid page
 	$dataEntry .=  "<div class='hang' style='position:relative;'>
                         <i class=\"fas fa-file-alt fs14\" style='color:#900000;text-indent:0;margin-left:2px;margin-right:1px;'></i>&nbsp;&nbsp;<a href='".APP_PATH_WEBROOT."DataEntry/record_home.php?pid=$project_id' style='color:#A00000;'>".
 						($user_rights['record_create'] ? $lang['bottom_62'] : $lang['bottom_72'])."</a>
 					</div>";
-	if ($status < 1) {
-		$dataEntry .=  "<div class='menuboxsub' style='position:relative;'>- ".
-						(($user_rights['record_create'] && ($user_rights['forms'][$Proj->firstForm] == '1' || $user_rights['forms'][$Proj->firstForm] == '3')) ? $lang['bottom_64'] : $lang['bottom_73'])."</div>";
-	}
-
-	## DATAMART
-	if (!($status == '2' && $data_locked) && $fhir_data_mart_create_project && DataMart::isEnabled($project_id)) {
-		$dataEntry .= "<div class='hang' style='position:relative;'><i class='fas fa-shopping-cart'></i>&nbsp;&nbsp;<a id='data-mart-menu-link' href='".APP_PATH_WEBROOT."index.php?pid=$project_id&route=DataMartController:index'>{$lang['global_155']}</a></div>";
-		if ($status < 1) {
-			$dataEntry .=  "<div class='menuboxsub' style='position:relative;'>- ".$lang['bottom_83']."</div>";
-		}
-	}
+//	if ($status < 1) {
+//		$dataEntry .=  "<div class='menuboxsub' style='position:relative;'>- ".
+//						(($user_rights['record_create'] && ($user_rights['forms'][$Proj->firstForm] == '1' || $user_rights['forms'][$Proj->firstForm] == '3')) ? $lang['bottom_64'] : $lang['bottom_73'])."</div>";
+//	}
+//
+//	## DATAMART
+//	if (!($status == '2' && $data_locked) && $fhir_data_mart_create_project && DataMart::isEnabled($project_id)) {
+//		$dataEntry .= "<div class='hang' style='position:relative;'><i class='fas fa-shopping-cart'></i>&nbsp;&nbsp;<a id='data-mart-menu-link' href='".APP_PATH_WEBROOT."index.php?pid=$project_id&route=DataMartController:index'>{$lang['global_155']}</a></div>";
+//		if ($status < 1) {
+//			$dataEntry .=  "<div class='menuboxsub' style='position:relative;'>- ".$lang['bottom_83']."</div>";
+//		}
+//	}
 
 	// If showing Scheduling OR Invite Participant links OR viewing a record in longitudinal...
 	if ((isset($_GET['id']) && PAGE == "DataEntry/record_home.php")
@@ -330,9 +330,9 @@ if (!empty($user_rights))
 										$record_display2
 									) .
 									RCView::div(array('style'=>'float:right;'),
-										RCView::a(array('id'=>'menuLnkChooseOtherRec','class'=>'opacity65','href'=>APP_PATH_WEBROOT."DataEntry/record_home.php?pid=$project_id"),
-											$lang['bottom_63']
-										)
+//										RCView::a(array('id'=>'menuLnkChooseOtherRec','class'=>'opacity65','href'=>APP_PATH_WEBROOT."DataEntry/record_home.php?pid=$project_id"),
+//											$lang['bottom_63']
+//										)
 									) .
 									RCView::div(array('class'=>'clear'), '')
 								);
@@ -358,7 +358,7 @@ if (!empty($user_rights))
 		$dataEntry .=  "<div class='menuboxsub' style='margin:8px 0 0;border-top:1px dashed #aaa;text-indent:0;padding-top:5px;font-size:10px;'>
 							$record_label
 							$event_label
-							" . (PAGE == "DataEntry/index.php" ? $lang['global_36'] . $lang['colon'] : "") . "
+							" /* (PAGE == "DataEntry/index.php" ? $lang['global_36'] . $lang['colon'] : "") */. "
 						</div>";
 	}
 
