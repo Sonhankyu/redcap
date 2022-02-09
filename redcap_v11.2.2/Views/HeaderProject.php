@@ -431,10 +431,28 @@ if (!empty($user_rights))
  * APPLICATIONS MENU
  * Show function links based on rights level (Don't allow designated Double Data Entry people to see pages displaying other user's data.)
  */
+$roles = UserRights::getRoles();
+
 $repeatingFormsEvents = $Proj->getRepeatingFormsEvents();
 $hasRepeatingForms = $Proj->hasRepeatingForms();
 $hasRepeatingEvents = $Proj->hasRepeatingEvents();
 $hasRepeatingFormsOrEvents = ($hasRepeatingForms || $hasRepeatingEvents);
+
+$subjId = $_GET['id'];
+//  Image Upload Button
+if (!empty($_GET['id']) and ($user_rights['user_rights'] == 1 or $roles[$user_rights['role_id']]['role_name'] == 'CRC')) {
+    $imgCollapsed = $appsMenuCollapsed ? "toggle-expand.png" : "toggle-collapse.png";
+    $imageUploadTitle = "<div style='float:left'>Image Upload</div>
+                    <div class='opacity65 projMenuToggle' id='$menu_id'>"
+        . RCView::a(array('href' => 'javascript:;'),
+            RCView::img(array('src' => $imgCollapsed, 'class' => ($isIE ? 'opacity65' : '')))
+        ) . "
+                    </div>";
+
+    $imageUpload = RCView::div(array('id' => 'imageUpload', 'class' => ''),
+        RCView::button(array('id' => 'imageUploadBtn', 'style'=>'width: 290px; font-weight: bold', 'class' => 'jqbutton', 'onclick'=>"window.location.href='" . APP_PATH_WEBROOT . "ImageUpload/dicomImageUpload.php?pid=$project_id&id=$subjId'"), 'Image Upload'));
+}
+
 
 $imgCollapsed = $appsMenuCollapsed ? "toggle-expand.png" : "toggle-collapse.png";
 $statusIconTitle = "<div style='float:left'>Status Icons</div>
@@ -706,6 +724,7 @@ if (isset($_GET['pid']) && is_numeric($_GET['pid']))
 	$dashboardsList = $dashBoardOb->outputDashboardPanel();
 
 	$westHtml = renderPanel('', $logoHtml)
+              . renderPanel($imageUploadTitle, $imageUpload, '')
               . renderPanel($homeSetupMenuTitle, $homeSetupMenu, 'home_setup_panel', $homeSetupMenuCollapsed)
 			  . renderPanel((isset($dataEntryTitle) ? $dataEntryTitle : ''), (isset($dataEntry) ? $dataEntry : ''), '', $dataEntryCollapsed)
 			  . renderPanel($appsMenuTitle, $appsMenu, 'app_panel', $appsMenuCollapsed)
